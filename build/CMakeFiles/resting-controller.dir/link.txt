@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC -g   -shared -Wl,-soname,libresting-controller.so -o libresting-controller.so CMakeFiles/resting-controller.dir/resting-controller.cpp.o /usr/local/lib/libMoby.so /usr/local/lib/libRavelin.so -Wl,-rpath,/usr/local/lib 
