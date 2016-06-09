@@ -75,9 +75,11 @@
         </geometry>
       </visual>
     </link>
-    <joint name='shoulder_pan_joint' type='revolute'>
+    <joint name='shoulder_pan_joint' type='gearbox'>
       <child>shoulder_link</child>
       <parent>base_link</parent>
+      <gearbox_ratio>10</gearbox_ratio>
+      <gearbox_reference_body>shoulder_pan_joint</gearbox_reference_body>
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
@@ -120,9 +122,11 @@
         </geometry>
       </visual>
     </link>
-    <joint name='shoulder_lift_joint' type='revolute'>
+    <joint name='shoulder_lift_joint' type='gearbox'>
       <child>upper_arm_link</child>
-      <parent>shoulder_link</parent>
+      <parent>shoulder_link</parent> 
+      <gearbox_ratio>10</gearbox_ratio>
+      <gearbox_reference_body>shoulder_lift_joint</gearbox_reference_body>
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
@@ -165,9 +169,11 @@
         </geometry>
       </visual>
     </link>
-    <joint name='elbow_joint' type='revolute'>
+    <joint name='elbow_joint' type='gearbox'>
       <child>forearm_link</child>
       <parent>upper_arm_link</parent>
+      <gearbox_ratio>10</gearbox_ratio>
+      <gearbox_reference_body>elbow_joint</gearbox_reference_body>
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
@@ -210,9 +216,11 @@
         </geometry>
       </visual>
     </link>
-    <joint name='wrist_1_joint' type='revolute'>
+    <joint name='wrist_1_joint' type='gearbox'>
       <child>wrist_1_link</child>
       <parent>forearm_link</parent>
+      <gearbox_ratio>10</gearbox_ratio>
+      <gearbox_reference_body>wrist_1_joint</gearbox_reference_body>
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
@@ -255,9 +263,11 @@
         </geometry>
       </visual>
     </link>
-    <joint name='wrist_2_joint' type='revolute'>
+    <joint name='wrist_2_joint' type='gearbox'>
       <child>wrist_2_link</child>
       <parent>wrist_1_link</parent>
+      <gearbox_ratio>10</gearbox_ratio>
+      <gearbox_reference_body>wrist_2_joint</gearbox_reference_body>
       <axis>
         <xyz>0 0 -1</xyz>
         <limit>
@@ -300,9 +310,11 @@
         </geometry>
       </visual>
     </link>
-    <joint name='wrist_3_joint' type='revolute'>
+    <joint name='wrist_3_joint' type='gearbox'>
       <child>wrist_3_link</child>
       <parent>wrist_2_link</parent>
+      <gearbox_ratio>10</gearbox_ratio>
+      <gearbox_reference_body>wrist_3_joint</gearbox_reference_body>
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
