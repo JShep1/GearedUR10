@@ -75,11 +75,32 @@
         </geometry>
       </visual>
     </link>
-    <joint name='shoulder_pan_joint' type='gearbox'>
+   <!-- <link name='intermediate_link'>
+      <pose>0 0 0.06365 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>1e6</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <visual name='intermediate_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://ur10/meshes/visual/Shoulder.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link> -->
+    <joint name='shoulder_pan_joint' type='revolute'>
       <child>shoulder_link</child>
       <parent>base_link</parent>
-      <gearbox_ratio>10</gearbox_ratio>
-      <gearbox_reference_body>shoulder_pan_joint</gearbox_reference_body>
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
@@ -90,7 +111,18 @@
         </limit>
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
-    </joint>
+    </joint> 
+    <!--<joint name='shoulder_pan_joint' type='gearbox'>
+      <child>shoulder_link</child>
+      <parent>base_link</parent>
+      <gearbox_ratio>10</gearbox_ratio>
+      <gearbox_reference_body>intermediate_link</gearbox_reference_body>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>--> 
+
     <link name='upper_arm_link'>
       <pose>0 0.220941 0.1273 3.14159 1.57079 3.14159</pose>
       <inertial>
@@ -122,11 +154,9 @@
         </geometry>
       </visual>
     </link>
-    <joint name='shoulder_lift_joint' type='gearbox'>
+    <joint name='shoulder_lift_joint' type='revolute'>
       <child>upper_arm_link</child>
       <parent>shoulder_link</parent> 
-      <gearbox_ratio>10</gearbox_ratio>
-      <gearbox_reference_body>shoulder_lift_joint</gearbox_reference_body>
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
@@ -138,6 +168,17 @@
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
+    <joint name='shoulder_pan_gearbox' type='gearbox'>
+      <child>upper_arm_link</child>
+      <parent>base_link</parent>
+      <gearbox_ratio>1</gearbox_ratio>
+      <gearbox_reference_body>shoulder_link</gearbox_reference_body>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint> 
+<!--
     <link name='forearm_link'>
       <pose>0.612 0.049041 0.1273 3.14159 1.57079 3.14159</pose>
       <inertial>
@@ -173,7 +214,7 @@
       <child>forearm_link</child>
       <parent>upper_arm_link</parent>
       <gearbox_ratio>10</gearbox_ratio>
-      <gearbox_reference_body>elbow_joint</gearbox_reference_body>
+      <gearbox_reference_body>forearm_link</gearbox_reference_body>
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
@@ -220,7 +261,7 @@
       <child>wrist_1_link</child>
       <parent>forearm_link</parent>
       <gearbox_ratio>10</gearbox_ratio>
-      <gearbox_reference_body>wrist_1_joint</gearbox_reference_body>
+      <gearbox_reference_body>wrist_1_link</gearbox_reference_body>
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
@@ -267,7 +308,7 @@
       <child>wrist_2_link</child>
       <parent>wrist_1_link</parent>
       <gearbox_ratio>10</gearbox_ratio>
-      <gearbox_reference_body>wrist_2_joint</gearbox_reference_body>
+      <gearbox_reference_body>wrist_2_link</gearbox_reference_body>
       <axis>
         <xyz>0 0 -1</xyz>
         <limit>
@@ -314,7 +355,7 @@
       <child>wrist_3_link</child>
       <parent>wrist_2_link</parent>
       <gearbox_ratio>10</gearbox_ratio>
-      <gearbox_reference_body>wrist_3_joint</gearbox_reference_body>
+      <gearbox_reference_body>wrist_3_link</gearbox_reference_body>
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
@@ -328,6 +369,6 @@
     </joint>
 
     <plugin name='ur10_controller' filename='libur10-controller.so'/>
-
+-->
   </model>
 </sdf>
