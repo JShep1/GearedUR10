@@ -44,6 +44,21 @@
         <xyz>0 0 1</xyz>
       </axis>
     </joint>
+    <link name='base_to_shoulder_gear'>
+      <pose>0 0 0.1273 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>7.778</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+    </link>
     <link name='shoulder_link'>
       <pose>0 0 0.1273 0 0 0</pose>
       <inertial>
@@ -123,6 +138,7 @@
       </axis>
     </joint>--> 
 
+<!--
     <link name='upper_arm_link'>
       <pose>0 0.220941 0.1273 3.14159 1.57079 3.14159</pose>
       <inertial>
@@ -178,7 +194,6 @@
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint> 
-<!--
     <link name='forearm_link'>
       <pose>0.612 0.049041 0.1273 3.14159 1.57079 3.14159</pose>
       <inertial>
