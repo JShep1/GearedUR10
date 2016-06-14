@@ -45,7 +45,7 @@
       </axis>
     </joint>
     <link name='base_to_shoulder_gear'>
-      <pose>0 0 0.1273 0 0 0</pose>
+      <pose>0 0.1 0.1273 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
         <mass>7.778</mass>
@@ -58,6 +58,15 @@
           <izz>1</izz>
         </inertia>
       </inertial>
+      <visual name='base_shoulder_visual'>
+        <pose>0 0.1 0.1273 0 0 0</pose>
+        <geometry>
+          <cylinder>
+             <radius>0.001</radius>
+             <length>0.2</length>
+          </cylinder>
+        </geometry>
+      </visual>
     </link>
     <link name='shoulder_link'>
       <pose>0 0 0.1273 0 0 0</pose>
@@ -112,7 +121,7 @@
           </mesh>
         </geometry>
       </visual>
-    </link> -->
+    </link> 
     <joint name='shoulder_pan_joint' type='revolute'>
       <child>shoulder_link</child>
       <parent>base_link</parent>
@@ -126,19 +135,47 @@
         </limit>
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
+    </joint>--> 
+    
+    <joint name='shoulder_pan_joint' type='revolute'>
+      <child>base_to_shoulder_gear</child>
+      <parent>world</parent>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+            <upper>0</upper>
+            <lower>0</lower>
+        </limit>
+      </axis>
     </joint> 
-    <!--<joint name='shoulder_pan_joint' type='gearbox'>
-      <child>shoulder_link</child>
-      <parent>base_link</parent>
-      <gearbox_ratio>10</gearbox_ratio>
-      <gearbox_reference_body>intermediate_link</gearbox_reference_body>
+    
+    <joint name='base_to_gear_joint' type='revolute'>
+      <child>base_link</child>
+      <parent>base_to_shoulder_gear</parent>
       <axis>
         <xyz>0 0 1</xyz>
-        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
-    </joint>--> 
+    </joint> 
+    <joint name='base_to_shoulder_joint' type='revolute'>
+      <child>shoulder_link</child>
+      <parent>base_to_shoulder_gear</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint> 
+    <joint name='shoulder_pan_joint' type='gearbox'>
+      <child>shoulder_link</child>
+      <parent>base_link</parent>
+      <gearbox_ratio>1.5</gearbox_ratio>
+      <gearbox_reference_body>base_to_shoulder_gear</gearbox_reference_body>
+      <!--<axis>
+        <xyz>1 0 0</xyz>
+      </axis>
+      <axis2>
+        <xyz>1 0 0</xyz>
+      </axis2>-->
+    </joint> 
 
-<!--
     <link name='upper_arm_link'>
       <pose>0 0.220941 0.1273 3.14159 1.57079 3.14159</pose>
       <inertial>
@@ -170,9 +207,49 @@
         </geometry>
       </visual>
     </link>
-    <joint name='shoulder_lift_joint' type='revolute'>
+    <link name='shoulder_to_arm_gear'>
+      <pose>0 0 0.3273 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>7.778</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <visual name='base_shoulder_visual'>
+        <pose>0 0 0.1273 0 0 0</pose>
+        <geometry>
+          <cylinder>
+             <radius>0.001</radius>
+             <length>0.2</length>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='shoulder_to_arm_gear_joint' type='revolute'>
+      <child>shoulder_link</child>
+      <parent>shoulder_to_arm_gear</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint> 
+    <joint name='arm_to_gear_joint' type='revolute'>
+      <child>upper_arm_link</child>
+      <parent>shoulder_to_arm_gear</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint> 
+    <joint name='shoulder_lift_joint' type='gearbox'>
       <child>upper_arm_link</child>
       <parent>shoulder_link</parent> 
+      <gearbox_ratio>1.5</gearbox_ratio>
+      <gearbox_reference_body>shoulder_to_arm_gear</gearbox_reference_body>
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
@@ -184,6 +261,7 @@
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
+<!--
     <joint name='shoulder_pan_gearbox' type='gearbox'>
       <child>upper_arm_link</child>
       <parent>base_link</parent>
