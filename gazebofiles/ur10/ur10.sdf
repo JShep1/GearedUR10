@@ -99,29 +99,7 @@
         </geometry>
       </visual>
     </link>
-   <!-- <link name='intermediate_link'>
-      <pose>0 0 0.06365 0 0 0</pose>
-      <inertial>
-        <pose>0 0 0 0 0 0</pose>
-        <mass>1e6</mass>
-        <inertia>
-          <ixx>1</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>1</iyy>
-          <iyz>0</iyz>
-          <izz>1</izz>
-        </inertia>
-      </inertial>
-      <visual name='intermediate_link_visual'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <mesh>
-            <uri>model://ur10/meshes/visual/Shoulder.dae</uri>
-          </mesh>
-        </geometry>
-      </visual>
-    </link> 
+   <!-- 
     <joint name='shoulder_pan_joint' type='revolute'>
       <child>shoulder_link</child>
       <parent>base_link</parent>
@@ -137,7 +115,7 @@
       </axis>
     </joint>--> 
     
-    <joint name='shoulder_pan_joint' type='revolute'>
+    <joint name='shoulder_to_world_joint' type='revolute'>
       <child>base_to_shoulder_gear</child>
       <parent>world</parent>
       <axis>
@@ -175,7 +153,6 @@
         <xyz>1 0 0</xyz>
       </axis2>-->
     </joint> 
-
     <link name='upper_arm_link'>
       <pose>0 0.220941 0.1273 3.14159 1.57079 3.14159</pose>
       <inertial>
@@ -221,7 +198,7 @@
           <izz>1</izz>
         </inertia>
       </inertial>
-      <visual name='base_shoulder_visual'>
+      <visual name='shoulder_to_arm_visual'>
         <pose>0 0 0.1273 0 0 0</pose>
         <geometry>
           <cylinder>
@@ -231,6 +208,14 @@
         </geometry>
       </visual>
     </link>
+   <!--
+    <joint name='world_to_shoulder_joint' type='revolute'>
+      <child>shoulder_to_arm_gear</child>
+      <parent>world</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint> 
     <joint name='shoulder_to_arm_gear_joint' type='revolute'>
       <child>shoulder_link</child>
       <parent>shoulder_to_arm_gear</parent>
@@ -250,6 +235,10 @@
       <parent>shoulder_link</parent> 
       <gearbox_ratio>1.5</gearbox_ratio>
       <gearbox_reference_body>shoulder_to_arm_gear</gearbox_reference_body>
+    </joint>
+    <joint name='shoulder_lift_joint' type='revolute'>
+      <child>upper_arm_link</child>
+      <parent>shoulder_link</parent> 
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
@@ -261,17 +250,30 @@
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
-<!--
-    <joint name='shoulder_pan_gearbox' type='gearbox'>
-      <child>upper_arm_link</child>
-      <parent>base_link</parent>
-      <gearbox_ratio>1</gearbox_ratio>
-      <gearbox_reference_body>shoulder_link</gearbox_reference_body>
-      <axis>
-        <xyz>0 0 1</xyz>
-        <use_parent_model_frame>1</use_parent_model_frame>
-      </axis>
-    </joint> 
+    <link name='upper_to_forearm_gear'>
+      <pose>0.7 0.05 0.15 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>3.778</mass>
+        <inertia>
+          <ixx>1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1</iyy>
+          <iyz>0</iyz>
+          <izz>1</izz>
+        </inertia>
+      </inertial>
+      <visual name='upper_to_forearm_visual'>
+        <pose>0.7 0.05 0.15 0 0 0</pose>
+        <geometry>
+          <cylinder>
+             <radius>0.001</radius>
+             <length>0.2</length>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>--><!--
     <link name='forearm_link'>
       <pose>0.612 0.049041 0.1273 3.14159 1.57079 3.14159</pose>
       <inertial>
@@ -303,11 +305,24 @@
         </geometry>
       </visual>
     </link>
-    <joint name='elbow_joint' type='gearbox'>
+    <joint name='upper_arm_to_forearm_gear_joint' type='revolute'>
+      <child>upper_arm_link</child>
+      <parent>upper_to_forearm_gear</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint> 
+    <joint name='forearm_to_forearm_gear_joint' type='revolute'>
       <child>forearm_link</child>
-      <parent>upper_arm_link</parent>
-      <gearbox_ratio>10</gearbox_ratio>
-      <gearbox_reference_body>forearm_link</gearbox_reference_body>
+      <parent>upper_to_forearm_gear</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+
+    <joint name='elbow_joint' type='revolute'>
+      <child>forearm_link</child>
+      <parent>upper_arm_link</parent> 
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
@@ -318,6 +333,12 @@
         </limit>
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
+    </joint>
+    <joint name='elbow_joint' type='gearbox'>
+      <child>forearm_link</child>
+      <parent>upper_arm_link</parent>
+      <gearbox_ratio>1.5</gearbox_ratio>
+      <gearbox_reference_body>upper_to_forearm_gear</gearbox_reference_body>
     </joint>
     <link name='wrist_1_link'>
       <pose>1.1843 0.049041 0.1273 3.14159 3.58979e-09 3.14159</pose>
