@@ -146,13 +146,8 @@
       <parent>base_link</parent>
       <gearbox_ratio>1.5</gearbox_ratio>
       <gearbox_reference_body>base_to_shoulder_gear</gearbox_reference_body>
-      <!--<axis>
-        <xyz>1 0 0</xyz>
-      </axis>
-      <axis2>
-        <xyz>1 0 0</xyz>
-      </axis2>-->
     </joint> 
+   <!--
     <link name='upper_arm_link'>
       <pose>0 0.220941 0.1273 3.14159 1.57079 3.14159</pose>
       <inertial>
@@ -199,7 +194,7 @@
         </inertia>
       </inertial>
       <visual name='shoulder_to_arm_visual'>
-        <pose>0 0 0.1273 0 0 0</pose>
+        <pose>0 0 0.3273 0 0 0</pose>
         <geometry>
           <cylinder>
              <radius>0.001</radius>
@@ -208,7 +203,6 @@
         </geometry>
       </visual>
     </link>
-   <!--
     <joint name='world_to_shoulder_joint' type='revolute'>
       <child>shoulder_to_arm_gear</child>
       <parent>world</parent>
