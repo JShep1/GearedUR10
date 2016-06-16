@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version='1.5'>
-  <model name='ur10'>
+  <model name='ur10_schunk_hybrid'>
     <link name='base_link'>
 <!--      <pose>0 0 0 0 0 0</pose>  -->
       <inertial>
@@ -16,10 +16,11 @@
         </inertia>
       </inertial>
       <collision name='base_link_collision'>
-        <pose>0 0 0 0 0 0</pose>
+        <pose>0 0 0 1.5708 0 0</pose>
+        <!-- <pose>0 0 0 0 0 0</pose> -->
         <geometry>
           <mesh>
-            <uri>model://gearedur10/meshes/collision/Base.dae</uri>
+            <uri>gazebofiles/gearedur10/meshes/Base.obj</uri>
           </mesh>
         </geometry>
       </collision>
@@ -27,7 +28,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://gearedur10/meshes/visual/Base.dae</uri>
+            <uri>gazebofiles/gearedur10/meshes/Base.obj</uri>
           </mesh>
         </geometry>
       </visual>
@@ -62,7 +63,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://gearedur10/meshes/collision/Shoulder.dae</uri>
+            <uri>gazebofiles/gearedur10/meshes/Shoulder.obj</uri>
           </mesh>
         </geometry>
       </collision>
@@ -70,7 +71,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://gearedur10/meshes/visual/Shoulder.dae</uri>
+            <uri>gazebofiles/gearedur10/meshes/Shoulder.obj</uri>
           </mesh>
         </geometry>
       </visual>
@@ -164,7 +165,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://gearedur10/meshes/collision/UpperArm.dae</uri>
+            <uri>gazebofiles/gearedur10/meshes/UpperArm.obj</uri>
           </mesh>
         </geometry>
       </collision>
@@ -172,7 +173,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://gearedur10/meshes/visual/UpperArm.dae</uri>
+            <uri>gazebofiles/gearedur10/meshes/UpperArm.obj</uri>
           </mesh>
         </geometry>
       </visual>
@@ -209,7 +210,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://gearedur10/meshes/collision/Forearm.dae</uri>
+            <uri>gazebofiles/gearedur10/meshes/Forearm.obj</uri>
           </mesh>
         </geometry>
       </collision>
@@ -217,7 +218,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://gearedur10/meshes/visual/Forearm.dae</uri>
+            <uri>gazebofiles/gearedur10/meshes/Forearm.obj</uri>
           </mesh>
         </geometry>
       </visual>
@@ -254,7 +255,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://gearedur10/meshes/collision/Wrist1.dae</uri>
+            <uri>gazebofiles/gearedur10/meshes/Wrist1.obj</uri>
           </mesh>
         </geometry>
       </collision>
@@ -262,7 +263,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://gearedur10/meshes/visual/Wrist1.dae</uri>
+            <uri>gazebofiles/gearedur10/meshes/Wrist1.obj</uri>
           </mesh>
         </geometry>
       </visual>
@@ -299,7 +300,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://gearedur10/meshes/collision/Wrist2.dae</uri>
+            <uri>gazebofiles/gearedur10/meshes/Wrist2.obj</uri>
           </mesh>
         </geometry>
       </collision>
@@ -307,7 +308,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://gearedur10/meshes/visual/Wrist2.dae</uri>
+            <uri>gazebofiles/gearedur10/meshes/Wrist2.obj</uri>
           </mesh>
         </geometry>
       </visual>
@@ -344,7 +345,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://gearedur10/meshes/collision/Wrist3.dae</uri>
+            <uri>gazebofiles/gearedur10/meshes/Wrist3.obj</uri>
           </mesh>
         </geometry>
       </collision>
@@ -352,7 +353,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://gearedur10/meshes/visual/Wrist3.dae</uri>
+            <uri>gazebofiles/gearedur10/meshes/Wrist3.obj</uri>
           </mesh>
         </geometry>
       </visual>

@@ -13,6 +13,6 @@
   <RecurrentForce recurrent-force-id="gravity" />
 </TimeSteppingSimulator>
 
-<SDF filename="model.sdf"/>
+<SDF filename="objgearedur10.sdf"/>
 </MOBY>
 </XML>
