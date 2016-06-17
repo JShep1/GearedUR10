@@ -130,6 +130,16 @@
       <parent>base_link</parent>
       <gearbox_ratio>1.5</gearbox_ratio>
       <gearbox_reference_body>base_shoulder_gear</gearbox_reference_body>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-6.28319</lower>
+          <upper>6.28319</upper>
+          <effort>330</effort>
+          <velocity>2.16</velocity>
+        </limit>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
     </joint>
    <!--
     <joint name='shoulder_pan_joint' type='revolute'>
