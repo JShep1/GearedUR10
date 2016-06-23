@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/john/motioncontrolproject/motion-control-manipulator/resting-controller-PID.cpp
+/home/john/GearedUR10/resting-controller-PID.cpp
 Moby/TimeSteppingSimulator.h
 -
 Moby/RCArticulatedBody.h

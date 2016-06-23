@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/john/motioncontrolproject/motion-control-manipulator/sinusoidal-controller.cpp
+/home/john/GearedUR10/sinusoidal-controller.cpp
 Moby/TimeSteppingSimulator.h
 -
 Moby/RCArticulatedBody.h

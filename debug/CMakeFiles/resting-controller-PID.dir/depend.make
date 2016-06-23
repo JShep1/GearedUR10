@@ -15,6 +15,8 @@ CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/i
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/CompGeom.h
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/CompGeom.inl
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/Constants.h
+CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/Constraint.h
+CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/Constraint.inl
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/ConstraintSimulator.h
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/ConstraintStabilization.h
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/ContactParameters.h
@@ -27,6 +29,7 @@ CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/i
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/GravityForce.h
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/HeightmapPrimitive.h
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/ImpactConstraintHandler.h
+CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/ImpactConstraintHandler.inl
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/IndexedTri.h
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/IndexedTriArray.h
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/IndexedTriArray.inl
@@ -59,8 +62,6 @@ CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/i
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/Simulator.inl
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/SparseJacobian.h
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/SpherePrimitive.h
-CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/SustainedUnilateralConstraintHandler.h
-CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/SustainedUnilateralConstraintProblemData.h
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/TessellatedPolyhedron.h
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/TessellatedPolyhedron.inl
 CMakeFiles/resting-controller-PID.dir/resting-controller-PID.cpp.o: /usr/local/include/Moby/ThickTriangle.h

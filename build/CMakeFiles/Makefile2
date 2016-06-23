@@ -50,10 +50,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/john/motioncontrolproject/motion-control-manipulator
+CMAKE_SOURCE_DIR = /home/john/GearedUR10
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/motioncontrolproject/motion-control-manipulator/build
+CMAKE_BINARY_DIR = /home/john/GearedUR10/build
 
 #=============================================================================
 # Target rules for target CMakeFiles/resting-controller.dir
@@ -62,7 +62,7 @@ CMAKE_BINARY_DIR = /home/john/motioncontrolproject/motion-control-manipulator/bu
 CMakeFiles/resting-controller.dir/all:
 	$(MAKE) -f CMakeFiles/resting-controller.dir/build.make CMakeFiles/resting-controller.dir/depend
 	$(MAKE) -f CMakeFiles/resting-controller.dir/build.make CMakeFiles/resting-controller.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/john/motioncontrolproject/motion-control-manipulator/build/CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/john/GearedUR10/build/CMakeFiles  1
 	@echo "Built target resting-controller"
 .PHONY : CMakeFiles/resting-controller.dir/all
 
@@ -72,9 +72,9 @@ all: CMakeFiles/resting-controller.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/resting-controller.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/motioncontrolproject/motion-control-manipulator/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/GearedUR10/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/resting-controller.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/motioncontrolproject/motion-control-manipulator/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/GearedUR10/build/CMakeFiles 0
 .PHONY : CMakeFiles/resting-controller.dir/rule
 
 # Convenience name for target.
@@ -97,7 +97,7 @@ clean: CMakeFiles/resting-controller.dir/clean
 CMakeFiles/resting-controller-PID.dir/all:
 	$(MAKE) -f CMakeFiles/resting-controller-PID.dir/build.make CMakeFiles/resting-controller-PID.dir/depend
 	$(MAKE) -f CMakeFiles/resting-controller-PID.dir/build.make CMakeFiles/resting-controller-PID.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/john/motioncontrolproject/motion-control-manipulator/build/CMakeFiles  2
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/john/GearedUR10/build/CMakeFiles  2
 	@echo "Built target resting-controller-PID"
 .PHONY : CMakeFiles/resting-controller-PID.dir/all
 
@@ -107,9 +107,9 @@ all: CMakeFiles/resting-controller-PID.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/resting-controller-PID.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/motioncontrolproject/motion-control-manipulator/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/GearedUR10/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/resting-controller-PID.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/motioncontrolproject/motion-control-manipulator/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/GearedUR10/build/CMakeFiles 0
 .PHONY : CMakeFiles/resting-controller-PID.dir/rule
 
 # Convenience name for target.
@@ -132,7 +132,7 @@ clean: CMakeFiles/resting-controller-PID.dir/clean
 CMakeFiles/sinusoidal-controller.dir/all:
 	$(MAKE) -f CMakeFiles/sinusoidal-controller.dir/build.make CMakeFiles/sinusoidal-controller.dir/depend
 	$(MAKE) -f CMakeFiles/sinusoidal-controller.dir/build.make CMakeFiles/sinusoidal-controller.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/john/motioncontrolproject/motion-control-manipulator/build/CMakeFiles  3
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/john/GearedUR10/build/CMakeFiles  3
 	@echo "Built target sinusoidal-controller"
 .PHONY : CMakeFiles/sinusoidal-controller.dir/all
 
@@ -142,9 +142,9 @@ all: CMakeFiles/sinusoidal-controller.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/sinusoidal-controller.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/motioncontrolproject/motion-control-manipulator/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/GearedUR10/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/sinusoidal-controller.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/motioncontrolproject/motion-control-manipulator/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/GearedUR10/build/CMakeFiles 0
 .PHONY : CMakeFiles/sinusoidal-controller.dir/rule
 
 # Convenience name for target.

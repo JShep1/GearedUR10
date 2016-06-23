@@ -38,10 +38,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/john/motioncontrolproject/motion-control-manipulator
+CMAKE_SOURCE_DIR = /home/john/GearedUR10
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/motioncontrolproject/motion-control-manipulator/build
+CMAKE_BINARY_DIR = /home/john/GearedUR10/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/resting-controller.dir/depend.make
@@ -54,17 +54,17 @@ include CMakeFiles/resting-controller.dir/flags.make
 
 CMakeFiles/resting-controller.dir/resting-controller.cpp.o: CMakeFiles/resting-controller.dir/flags.make
 CMakeFiles/resting-controller.dir/resting-controller.cpp.o: ../resting-controller.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/john/motioncontrolproject/motion-control-manipulator/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/john/GearedUR10/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/resting-controller.dir/resting-controller.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/resting-controller.dir/resting-controller.cpp.o -c /home/john/motioncontrolproject/motion-control-manipulator/resting-controller.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/resting-controller.dir/resting-controller.cpp.o -c /home/john/GearedUR10/resting-controller.cpp
 
 CMakeFiles/resting-controller.dir/resting-controller.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/resting-controller.dir/resting-controller.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/john/motioncontrolproject/motion-control-manipulator/resting-controller.cpp > CMakeFiles/resting-controller.dir/resting-controller.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/john/GearedUR10/resting-controller.cpp > CMakeFiles/resting-controller.dir/resting-controller.cpp.i
 
 CMakeFiles/resting-controller.dir/resting-controller.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/resting-controller.dir/resting-controller.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/john/motioncontrolproject/motion-control-manipulator/resting-controller.cpp -o CMakeFiles/resting-controller.dir/resting-controller.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/john/GearedUR10/resting-controller.cpp -o CMakeFiles/resting-controller.dir/resting-controller.cpp.s
 
 CMakeFiles/resting-controller.dir/resting-controller.cpp.o.requires:
 .PHONY : CMakeFiles/resting-controller.dir/resting-controller.cpp.o.requires
@@ -102,6 +102,6 @@ CMakeFiles/resting-controller.dir/clean:
 .PHONY : CMakeFiles/resting-controller.dir/clean
 
 CMakeFiles/resting-controller.dir/depend:
-	cd /home/john/motioncontrolproject/motion-control-manipulator/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/john/motioncontrolproject/motion-control-manipulator /home/john/motioncontrolproject/motion-control-manipulator /home/john/motioncontrolproject/motion-control-manipulator/build /home/john/motioncontrolproject/motion-control-manipulator/build /home/john/motioncontrolproject/motion-control-manipulator/build/CMakeFiles/resting-controller.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/john/GearedUR10/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/john/GearedUR10 /home/john/GearedUR10 /home/john/GearedUR10/build /home/john/GearedUR10/build /home/john/GearedUR10/build/CMakeFiles/resting-controller.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/resting-controller.dir/depend
 

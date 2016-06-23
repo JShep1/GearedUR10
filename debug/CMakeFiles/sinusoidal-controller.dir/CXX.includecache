@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/john/motioncontrolproject/motion-control-manipulator/sinusoidal-controller.cpp
+/home/john/GearedUR10/sinusoidal-controller.cpp
 Moby/TimeSteppingSimulator.h
 -
 Moby/RCArticulatedBody.h
@@ -43,7 +43,7 @@ Ravelin/SMomentumd.h
 -
 Ravelin/sorted_pair
 -
-Moby/UnilateralConstraint.h
+Moby/Constraint.h
 -
 Moby/ControlledBody.h
 -
@@ -163,7 +163,7 @@ Moby/PairwiseDistInfo.h
 -
 Moby/CollisionGeometry.h
 -
-Moby/UnilateralConstraint.h
+Moby/Constraint.h
 -
 Moby/RigidBody.h
 -
@@ -266,6 +266,36 @@ Ravelin/Matrix3d.h
 Ravelin/Pose3d.h
 -
 
+/usr/local/include/Moby/Constraint.h
+iostream
+-
+list
+-
+Ravelin/Vector3d.h
+-
+Ravelin/SForced.h
+-
+Ravelin/DynamicBodyd.h
+-
+Ravelin/SingleBodyd.h
+-
+boost/shared_ptr.hpp
+-
+Moby/Constants.h
+-
+Moby/Types.h
+-
+Moby/Joint.h
+-
+Moby/CollisionGeometry.h
+-
+Moby/ContactParameters.h
+-
+Constraint.inl
+/usr/local/include/Moby/Constraint.inl
+
+/usr/local/include/Moby/Constraint.inl
+
 /usr/local/include/Moby/ConstraintSimulator.h
 map
 -
@@ -275,15 +305,11 @@ Moby/Simulator.h
 -
 Moby/ImpactConstraintHandler.h
 -
-Moby/PenaltyConstraintHandler.h
--
-Moby/SustainedUnilateralConstraintHandler.h
--
 Moby/PairwiseDistInfo.h
 -
 Moby/CCD.h
 -
-Moby/UnilateralConstraint.h
+Moby/Constraint.h
 -
 Moby/ConstraintStabilization.h
 -
@@ -295,7 +321,7 @@ Ravelin/DynamicBodyd.h
 -
 Moby/LCP.h
 -
-Moby/UnilateralConstraintProblemData.h
+Moby/Constraint.h
 -
 Moby/PairwiseDistInfo.h
 -
@@ -387,10 +413,12 @@ Moby/LCP.h
 -
 Moby/SparseJacobian.h
 -
-Moby/UnilateralConstraint.h
+Moby/Constraint.h
 -
-Moby/UnilateralConstraintProblemData.h
--
+ImpactConstraintHandler.inl
+/usr/local/include/Moby/ImpactConstraintHandler.inl
+
+/usr/local/include/Moby/ImpactConstraintHandler.inl
 
 /usr/local/include/Moby/IndexedTri.h
 limits
@@ -709,7 +737,7 @@ Moby/Base.h
 -
 Moby/LCP.h
 -
-Moby/UnilateralConstraint.h
+Moby/Constraint.h
 -
 
 /usr/local/include/Moby/RecurrentForce.h
@@ -800,38 +828,6 @@ Ravelin/MatrixNd.h
 Moby/Primitive.h
 -
 
-/usr/local/include/Moby/SustainedUnilateralConstraintHandler.h
-list
--
-vector
--
-map
--
-Ravelin/LinAlgd.h
--
-Moby/Base.h
--
-Moby/Types.h
--
-Moby/LCP.h
--
-Moby/UnilateralConstraint.h
--
-Moby/SustainedUnilateralConstraintProblemData.h
--
-
-/usr/local/include/Moby/SustainedUnilateralConstraintProblemData.h
-vector
--
-Ravelin/MatrixNd.h
--
-Ravelin/VectorNd.h
--
-Moby/UnilateralConstraint.h
--
-Moby/Types.h
--
-
 /usr/local/include/Moby/TessellatedPolyhedron.h
 ostream
 -
@@ -879,13 +875,11 @@ Moby/ImpactConstraintHandler.h
 -
 Moby/PenaltyConstraintHandler.h
 -
-Moby/SustainedUnilateralConstraintHandler.h
--
 Moby/PairwiseDistInfo.h
 -
 Moby/CCD.h
 -
-Moby/UnilateralConstraint.h
+Moby/Constraint.h
 -
 
 /usr/local/include/Moby/TorusPrimitive.h
