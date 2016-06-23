@@ -951,7 +951,8 @@
           <upper>0.00001</upper>
         </limit>
       </axis>
-    </joint>
+    </joint><!--
     <plugin name='ur10_controller' filename='libur10-controller.so'/>
+  -->
   </model>
 </sdf>
