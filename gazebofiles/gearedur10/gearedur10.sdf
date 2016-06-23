@@ -33,8 +33,8 @@
       </visual>
     </link>
     <joint name='world_joint' type='revolute'>
-      <child>base_link</child>
       <parent>world</parent>
+      <child>base_link</child>
       <axis>
         <limit>
           <lower>0</lower>
@@ -112,29 +112,45 @@
     </joint>
 -->
     <joint name='base_gear_joint' type='revolute'>
-      <child>base_link</child>
-      <parent>base_shoulder_gear</parent>
+      <parent>base_link</parent>
+      <child>base_shoulder_gear</child>
       <axis>
         <xyz>0 0 1</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
+<!--   
+        <xyz>0 0 1</xyz>
+-->
       </axis>
     </joint>
     <joint name='shoulder_gear_joint' type='revolute'>
-      <child>shoulder_link</child>
       <parent>base_shoulder_gear</parent>
+      <child>shoulder_link</child>
       <axis>
         <xyz>0 0 1</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
+<!--   
+        <xyz>0 0 1</xyz>
+-->
       </axis>
     </joint>
     <joint name='shoulder_pan_joint' type='gearbox'>
-      <child>shoulder_link</child>
       <parent>base_link</parent>
+      <child>shoulder_link</child>
       <gearbox_ratio>1.5</gearbox_ratio>
       <gearbox_reference_body>base_shoulder_gear</gearbox_reference_body>
       <axis>
-         <xyz>1.0 0.0 0.0</xyz>
+         <xyz>0.0 0.0 -1.0</xyz>
+        <limit>
+          <lower>-6.28319</lower>
+          <upper>6.28319</upper>
+          <effort>330</effort>
+          <velocity>2.16</velocity>
+        </limit>
+        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
       <axis2>
-         <xyz>1.0 0.0 0.0</xyz>
+         <xyz>0.0 0.0 1.0</xyz>
+        <use_parent_model_frame>0</use_parent_model_frame>
       </axis2>
     </joint>
    <!--
@@ -185,7 +201,7 @@
       </visual>
     </link>
     <link name='shoulder_arm_gear'>
-      <pose>0 0.320941 0.1273 0 0 0</pose>
+      <pose>0 0.275941 0.1273 3.14159 1.57079 3.14159</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
         <mass>1.778</mass>
@@ -221,29 +237,39 @@
     </joint>
  -->
     <joint name='arm_gear_joint' type='revolute'>
-      <child>upper_arm_link</child>
       <parent>shoulder_arm_gear</parent>
+      <child>upper_arm_link</child>
       <axis>
         <xyz>0 1 0</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
     <joint name='shoulder1_gear_joint' type='revolute'>
-      <child>shoulder_link</child>
-      <parent>shoulder_arm_gear</parent>
+      <parent>shoulder_link</parent>
+      <child>shoulder_arm_gear</child>
       <axis>
         <xyz>0 1 0</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
     <joint name='shoulder_lift_joint' type='gearbox'>
-      <child>upper_arm_link</child>
       <parent>shoulder_link</parent>
+      <child>upper_arm_link</child>
       <gearbox_ratio>1.5</gearbox_ratio>
       <gearbox_reference_body>shoulder_arm_gear</gearbox_reference_body>
       <axis>
-         <xyz>0.0 0.0 1.0</xyz>
+         <xyz>0.0 -1.0 0.0</xyz>
+        <limit>
+          <lower>-6.28319</lower>
+          <upper>6.28319</upper>
+          <effort>330</effort>
+          <velocity>2.16</velocity>
+        </limit>
+        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
       <axis2>
          <xyz>0.0 1.0 0.0</xyz>
+        <use_parent_model_frame>0</use_parent_model_frame>
       </axis2>
     </joint>
 <!--
@@ -294,7 +320,7 @@
       </visual>
     </link>
     <link name='upper_forearm_gear'>
-      <pose>0.612 -0.049041 0.1273 0 0 0</pose>
+      <pose>0.612 -0.049041 0.1273 3.14159 1.57079 3.14159</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
         <mass>1.778</mass>
@@ -316,30 +342,53 @@
         </geometry>
       </visual>
     </link>
-    <joint name='upperarm_gear_joint' type='revolute'>
-      <child>upper_arm_link</child>
-      <parent>upper_forearm_gear</parent>
+<!--
+    <joint name='world_forearm_gear_joint' type='revolute'>
+      <child>upper_forearm_gear</child>
+      <parent>world</parent>
       <axis>
         <xyz>0 0 1</xyz>
+        <limit>
+           <upper>0</upper>
+           <lower>0</lower>
+        </limit>
+      </axis>
+    </joint>
+    -->
+    <joint name='upperarm_gear_joint' type='revolute'>
+      <parent>upper_arm_link</parent>
+      <child>upper_forearm_gear</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
     <joint name='forearm_gear_joint' type='revolute'>
-      <child>forearm_link</child>
       <parent>upper_forearm_gear</parent>
+      <child>forearm_link</child>
       <axis>
         <xyz>0 1 0</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
     <joint name='elbow_joint' type='gearbox'>
-      <child>forearm_link</child>
       <parent>upper_arm_link</parent>
+      <child>forearm_link</child>
       <gearbox_ratio>1.5</gearbox_ratio>
       <gearbox_reference_body>upper_forearm_gear</gearbox_reference_body>
       <axis>
-         <xyz>0.0 0.0 1.0</xyz>
+         <xyz>0 -1 0</xyz>
+        <limit>
+          <lower>-6.28319</lower>
+          <upper>6.28319</upper>
+          <effort>150</effort>
+          <velocity>3.15</velocity>
+        </limit>
+        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
       <axis2>
-         <xyz>1.0 0.0 0.0</xyz>
+         <xyz>0 1 0</xyz>
+        <use_parent_model_frame>0</use_parent_model_frame>
       </axis2>
     </joint>
 <!--
@@ -390,7 +439,7 @@
       </visual>
     </link>
     <link name='forearm_w1_gear'>
-      <pose>1.1843 0.049041 0.1973 0 0 0</pose>
+      <pose>1.1843 -0.049041 0.1273 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
         <mass>1.778</mass>
@@ -413,33 +462,43 @@
       </visual>
     </link>
     <joint name='fore_gear_joint' type='revolute'>
-      <child>forearm_link</child>
-      <parent>forearm_w1_gear</parent>
+      <parent>forearm_link</parent>
+      <child>forearm_w1_gear</child>
       <axis>
-        <xyz>0 0 1</xyz>
+        <xyz>0 1 0</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
     <joint name='w1_gear_joint' type='revolute'>
-      <child>wrist_1_link</child>
       <parent>forearm_w1_gear</parent>
+      <child>wrist_1_link</child>
       <axis>
         <xyz>0 1 0</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
     <joint name='wrist_1_joint' type='gearbox'>
-      <child>wrist_1_link</child>
       <parent>forearm_link</parent>
-      <gearbox_ratio>1.5</gearbox_ratio>
+      <child>wrist_1_link</child>
+      <gearbox_ratio>-1.5</gearbox_ratio>
       <gearbox_reference_body>forearm_w1_gear</gearbox_reference_body>
       <axis>
-         <xyz>0.0 0.0 1.0</xyz>
+         <xyz>0.0 -1.0 0.0</xyz>
+        <limit>
+          <lower>-6.28319</lower>
+          <upper>6.28319</upper>
+          <effort>54</effort>
+          <velocity>3.2</velocity>
+        </limit>
+        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
       <axis2>
-         <xyz>1.0 0.0 0.0</xyz>
+         <xyz>0.0 1.0 0.0</xyz>
+        <use_parent_model_frame>0</use_parent_model_frame>
       </axis2>
     </joint>
 <!--
-    <joint name='wrist_1_joint' type='revolute'>
+    <joint name='wrist_forearm_w1_gear1_joint' type='revolute'>
       <child>wrist_1_link</child>
       <parent>forearm_link</parent>
       <axis>
@@ -486,7 +545,7 @@
       </visual>
     </link>
     <link name='w1_w2_gear'>
-      <pose>1.1843 0.238941 0.1273 0 0 0</pose>
+      <pose>1.1843 0.163941 0.2073 3.14159 3.58979e-09 3.14159</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
         <mass>1.778</mass>
@@ -509,29 +568,39 @@
       </visual>
     </link>
     <joint name='wrist1_gear_joint' type='revolute'>
-      <child>wrist_1_link</child>
-      <parent>w1_w2_gear</parent>
+      <parent>wrist_1_link</parent>
+      <child>w1_w2_gear</child>
       <axis>
-        <xyz>0 0 1</xyz>
+        <xyz>0 0 -1</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
     <joint name='w2_gear_joint' type='revolute'>
-      <child>wrist_2_link</child>
       <parent>w1_w2_gear</parent>
+      <child>wrist_2_link</child>
       <axis>
-        <xyz>0 1 0</xyz>
+        <xyz>0 0 -1</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
     <joint name='wrist_2_joint' type='gearbox'>
-      <child>wrist_2_link</child>
       <parent>wrist_1_link</parent>
+      <child>wrist_2_link</child>
       <gearbox_ratio>1.5</gearbox_ratio>
       <gearbox_reference_body>w1_w2_gear</gearbox_reference_body>
       <axis>
-         <xyz>0.0 0.0 1.0</xyz>
+         <xyz>0.0 0.0 -1.0</xyz>
+        <limit>
+          <lower>-6.28319</lower>
+          <upper>6.28319</upper>
+          <effort>54</effort>
+          <velocity>3.2</velocity>
+        </limit>
+        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
       <axis2>
-         <xyz>1.0 0.0 0.0</xyz>
+         <xyz>0.0 0.0 -1.0</xyz>
+        <use_parent_model_frame>0</use_parent_model_frame>
       </axis2>
     </joint>
   <!-- 
@@ -605,29 +674,39 @@
       </visual>
     </link>
     <joint name='wrist2_gear_joint' type='revolute'>
-      <child>wrist_2_link</child>
-      <parent>w2_w3_gear</parent>
+      <parent>wrist_2_link</parent>
+      <child>w2_w3_gear</child>
       <axis>
-        <xyz>0 0 1</xyz>
+        <xyz>0 1 0</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
     <joint name='w3_gear_joint' type='revolute'>
-      <child>wrist_3_link</child>
       <parent>w2_w3_gear</parent>
+      <child>wrist_3_link</child>
       <axis>
         <xyz>0 1 0</xyz>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
     <joint name='wrist_3_joint' type='gearbox'>
-      <child>wrist_3_link</child>
       <parent>wrist_2_link</parent>
+      <child>wrist_3_link</child>
       <gearbox_ratio>1.5</gearbox_ratio>
       <gearbox_reference_body>w2_w3_gear</gearbox_reference_body>
       <axis>
-         <xyz>0.0 0.0 1.0</xyz>
+         <xyz>0.0 -1.0 0.0</xyz>
+        <limit>
+          <lower>-6.28319</lower>
+          <upper>6.28319</upper>
+          <effort>54</effort>
+          <velocity>3.2</velocity>
+        </limit>
+        <use_parent_model_frame>0</use_parent_model_frame>
       </axis>
       <axis2>
-         <xyz>1.0 0.0 0.0</xyz>
+         <xyz>0.0 1.0 0.0</xyz>
+        <use_parent_model_frame>0</use_parent_model_frame>
       </axis2>
     </joint>
 <!--

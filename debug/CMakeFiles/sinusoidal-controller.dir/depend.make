@@ -15,6 +15,8 @@ CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/inc
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/CompGeom.h
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/CompGeom.inl
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/Constants.h
+CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/Constraint.h
+CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/Constraint.inl
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/ConstraintSimulator.h
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/ConstraintStabilization.h
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/ContactParameters.h
@@ -27,6 +29,7 @@ CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/inc
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/GravityForce.h
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/HeightmapPrimitive.h
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/ImpactConstraintHandler.h
+CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/ImpactConstraintHandler.inl
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/IndexedTri.h
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/IndexedTriArray.h
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/IndexedTriArray.inl
@@ -60,8 +63,6 @@ CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/inc
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/Simulator.inl
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/SparseJacobian.h
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/SpherePrimitive.h
-CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/SustainedUnilateralConstraintHandler.h
-CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/SustainedUnilateralConstraintProblemData.h
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/TessellatedPolyhedron.h
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/TessellatedPolyhedron.inl
 CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o: /usr/local/include/Moby/ThickTriangle.h

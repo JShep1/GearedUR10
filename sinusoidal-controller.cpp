@@ -96,9 +96,19 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
 
   for (unsigned i=0;i< joints.size();i++)
   {
+    if (joints[i]->joint_id!="shoulder_lift_joint" &&
+        joints[i]->joint_id!="r_finger_actuator" &&
+        joints[i]->joint_id!="l_finger_actuator" &&
+        joints[i]->joint_id!="wrist_1_joint" &&
+        joints[i]->joint_id!="wrist_2_joint" &&
+        joints[i]->joint_id!="wrist_3_joint" &&
+        joints[i]->joint_id!="shoulder_pan_joint" &&
+        joints[i]->joint_id!="elbow_joint")
+        {continue;}
     if (joints[i]->joint_id.find("fixed") == std::string::npos && 
         joints[i]->joint_id != "world_joint")
-    { double q = joints[i]->q[0];
+    { 
+      double q = joints[i]->q[0];
       double qdot = joints[i]->qd[0];
 	std::map<std::string, double>::iterator aq,aqd;
 	aq = q_des.find(joints[i]->joint_id);
@@ -106,7 +116,6 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
       // compute the position error using desired joint position from 
       // q_des and q
       double perr = aq->second - q;
-
 	if (joints[i]->joint_id == "shoulder_lift_joint"){//the following set the respective joints'
 	shoulderlift = perr;
 	shoulderlifti +=perr;
@@ -383,7 +392,7 @@ void init(void* separator, const std::map<std::string, Moby::BasePtr>& read_map,
     // Find the simulator reference
     if (!sim)
       sim = boost::dynamic_pointer_cast<TimeSteppingSimulator>(i->second);
-    if (i->first == "ur10_schunk_hybrid")
+    if (i->first == "ur10")
       robot = boost::dynamic_pointer_cast<RCArticulatedBody>(i->second);
   }
 
