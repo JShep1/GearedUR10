@@ -96,6 +96,11 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
 
   for (unsigned i=0;i< joints.size();i++)
   {
+      //joints[i]->q[0];
+    if (true){ //comment this out when need to fix bug 
+       std::cout<<i<<" "<<joints[i]->joint_id<<std::endl;
+       continue; 
+    }
     if (joints[i]->joint_id!="shoulder_lift_joint" &&
         joints[i]->joint_id!="r_finger_actuator" &&
         joints[i]->joint_id!="l_finger_actuator" &&
@@ -107,7 +112,7 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
         {continue;}
     if (joints[i]->joint_id.find("fixed") == std::string::npos && 
         joints[i]->joint_id != "world_joint")
-    { 
+    {
       double q = joints[i]->q[0];
       double qdot = joints[i]->qd[0];
 	std::map<std::string, double>::iterator aq,aqd;
