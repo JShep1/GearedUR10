@@ -75,21 +75,21 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
   const double PERIOD = 5.0;
   const double AMP = 0.5;
   const double SMALL_AMP = AMP*0.1;
-  q_des["shoulder_pan_joint"] = std::sin(t*PERIOD)*AMP;
-  q_des["shoulder_lift_joint"] = std::sin(t*2.0*PERIOD)*SMALL_AMP;
-  q_des["elbow_joint"] = std::sin(t*2.0/3.0*PERIOD)*AMP;
-  q_des["wrist_1_joint"] = std::sin(t*1.0/7.0*PERIOD)*AMP;
-  q_des["wrist_2_joint"] = std::sin(t*2.0/11.0*PERIOD)*AMP;
-  q_des["wrist_3_joint"] = std::sin(t*3.0/13.0*PERIOD)*AMP;
+  q_des["base_gear_joint"] = std::sin(t*PERIOD)*AMP;
+  q_des["arm_gear_joint"] = std::sin(t*2.0*PERIOD)*SMALL_AMP;
+  q_des["upperarm_gear_joint"] = std::sin(t*2.0/3.0*PERIOD)*AMP;
+  q_des["fore_gear_joint"] = std::sin(t*1.0/7.0*PERIOD)*AMP;
+  q_des["wrist1_gear_joint"] = std::sin(t*2.0/11.0*PERIOD)*AMP;
+  q_des["wrist2_gear_joint"] = std::sin(t*3.0/13.0*PERIOD)*AMP;
   q_des["l_finger_actuator"] = 0.0;
   q_des["r_finger_actuator"] = 0.0;
 
-  qd_des["shoulder_pan_joint"] = std::cos(t*PERIOD)*AMP*PERIOD;
-  qd_des["shoulder_lift_joint"] = std::cos(t*2.0*PERIOD)*SMALL_AMP*PERIOD*2.0;
-  qd_des["elbow_joint"] = std::cos(t*2.0/3.0*PERIOD)*AMP*PERIOD*2.0/3.0;
-  qd_des["wrist_1_joint"] = std::cos(t*1.0/7.0*PERIOD)*AMP*PERIOD*1.0/7.0;
-  qd_des["wrist_2_joint"] = std::cos(t*2.0/11.0*PERIOD)*AMP*PERIOD*2.0/11.0;
-  qd_des["wrist_3_joint"] = std::cos(t*3.0/13.0*PERIOD)*AMP*PERIOD*3.0/13.0;
+  qd_des["base_gear_joint"] = std::cos(t*PERIOD)*AMP*PERIOD;
+  qd_des["arm_gear_joint"] = std::cos(t*2.0*PERIOD)*SMALL_AMP*PERIOD*2.0;
+  qd_des["upper_arm_gear_joint"] = std::cos(t*2.0/3.0*PERIOD)*AMP*PERIOD*2.0/3.0;
+  qd_des["fore_gear_joint"] = std::cos(t*1.0/7.0*PERIOD)*AMP*PERIOD*1.0/7.0;
+  qd_des["wrist1_gear_joint"] = std::cos(t*2.0/11.0*PERIOD)*AMP*PERIOD*2.0/11.0;
+  qd_des["wrist2_gear_joint"] = std::cos(t*3.0/13.0*PERIOD)*AMP*PERIOD*3.0/13.0;
   qd_des["l_finger_actuator"] = 0.0;
   qd_des["r_finger_actuator"] = 0.0;
 
@@ -97,22 +97,24 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
   for (unsigned i=0;i< joints.size();i++)
   {
       //joints[i]->q[0];
-    if (true){ //comment this out when need to fix bug 
+    /*if (true){ //comment this out when need to fix bug 
        std::cout<<i<<" "<<joints[i]->joint_id<<std::endl;
-       continue; 
-    }
-    if (joints[i]->joint_id!="shoulder_lift_joint" &&
+     //  continue; 
+    }*/
+    if (joints[i]->joint_id!="base_gear_joint" &&
         joints[i]->joint_id!="r_finger_actuator" &&
         joints[i]->joint_id!="l_finger_actuator" &&
-        joints[i]->joint_id!="wrist_1_joint" &&
-        joints[i]->joint_id!="wrist_2_joint" &&
-        joints[i]->joint_id!="wrist_3_joint" &&
-        joints[i]->joint_id!="shoulder_pan_joint" &&
-        joints[i]->joint_id!="elbow_joint")
+        joints[i]->joint_id!="wrist1_gear_joint" &&
+        joints[i]->joint_id!="wrist2_gear_joint" &&
+        joints[i]->joint_id!="fore_gear_joint" &&
+        joints[i]->joint_id!="upperarm_gear_joint" &&
+        joints[i]->joint_id!="arm_gear_joint")
         {continue;}
     if (joints[i]->joint_id.find("fixed") == std::string::npos && 
         joints[i]->joint_id != "world_joint")
     {
+      
+       std::cout<<i<<" "<<joints[i]->joint_id<<std::endl;
       double q = joints[i]->q[0];
       double qdot = joints[i]->qd[0];
 	std::map<std::string, double>::iterator aq,aqd;
@@ -121,22 +123,22 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
       // compute the position error using desired joint position from 
       // q_des and q
       double perr = aq->second - q;
-	if (joints[i]->joint_id == "shoulder_lift_joint"){//the following set the respective joints'
+	if (joints[i]->joint_id == "arm_gear_joint"){//the following set the respective joints'
 	shoulderlift = perr;
 	shoulderlifti +=perr;
-      }else if (joints[i]->joint_id == "elbow_joint"){
+      }else if (joints[i]->joint_id == "upperarm_gear_joint"){
 	elbow = perr;
 	elbowi+= perr;
-      }else if (joints[i]->joint_id == "shoulder_pan_joint"){
+      }else if (joints[i]->joint_id == "base_gear_joint"){
 	shoulderpan = perr;
 	shoulderpani +=perr;
-      }else if (joints[i]->joint_id == "wrist_1_joint"){
+      }else if (joints[i]->joint_id == "fore_gear_joint"){
 	wrist1 = perr;
 	wrist1i +=perr;
-      }else if (joints[i]->joint_id == "wrist_2_joint"){
+      }else if (joints[i]->joint_id == "wrist1_gear_joint"){
 	wrist2 = perr;
 	wrist2i += perr;
-      }else if (joints[i]->joint_id == "wrist_3_joint"){
+      }else if (joints[i]->joint_id == "wrist2_gear_joint"){
 	wrist3 = perr;
 	wrist3i += perr;
       }else if (joints[i]->joint_id == "l_finger_actuator"){
@@ -149,17 +151,17 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
 //compute the velocity error using desired joint velocity from 
       // qd_des and q
       double verr = aqd->second - qdot;
-       if (joints[i]->joint_id == "shoulder_lift_joint"){//set the joints' respective velocity error
+       if (joints[i]->joint_id == "arm_gear_joint"){//set the joints' respective velocity error
 	shoulderliftv = verr;
-      }else if (joints[i]->joint_id == "elbow_joint"){
+      }else if (joints[i]->joint_id == "upperarm_gear_joint"){
 	elbowv = verr;
-      }else if (joints[i]->joint_id == "shoulder_pan_joint"){
+      }else if (joints[i]->joint_id == "base_gear_joint"){
 	shoulderpanv = verr;
-      }else if (joints[i]->joint_id == "wrist_1_joint"){
+      }else if (joints[i]->joint_id == "fore_gear_joint"){
 	wrist1v = verr;
-      }else if (joints[i]->joint_id == "wrist_2_joint"){
+      }else if (joints[i]->joint_id == "wrist1_gear_joint"){
 	wrist2v = verr;
-      }else if (joints[i]->joint_id == "wrist_3_joint"){
+      }else if (joints[i]->joint_id == "wrist2_gear_joint"){
 	wrist3v = verr;
       }else if (joints[i]->joint_id == "l_finger_actuator"){
 	lfingerv = verr;
@@ -176,17 +178,17 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
 	//std::cout <<"kp: "<<kp<<" ki: "<<ki<<" kd: "<<kv<<std::endl;
       // compute the generalized force contribution
       double tau = 0;	
-	if (joints[i]->joint_id == "shoulder_lift_joint"){//set the tau value for the given joint
+	if (joints[i]->joint_id == "arm_gear_joint"){//set the tau value for the given joint
 	  tau = (kp*shoulderlift+kv*shoulderliftv);
-	}else if(joints[i]->joint_id == "elbow_joint"){
+	}else if(joints[i]->joint_id == "upperarm_gear_joint"){
 	  tau = (kp*elbow+kv*elbowv);
-	}else if(joints[i]->joint_id == "shoulder_pan_joint"){
+	}else if(joints[i]->joint_id == "base_gear_joint"){
 	  tau = (kp*shoulderpan+kv*shoulderpanv);
-	}else if(joints[i]->joint_id == "wrist_1_joint"){
+	}else if(joints[i]->joint_id == "forearm_gear_joint"){
 	  tau = (kp*wrist1+kv*wrist1v);
-	}else if(joints[i]->joint_id == "wrist_2_joint"){
+	}else if(joints[i]->joint_id == "wrist1_gear_joint"){
 	  tau = (kp*wrist2+kv*wrist2v);
-	}else if(joints[i]->joint_id == "wrist_3_joint"){
+	}else if(joints[i]->joint_id == "wrist2_gear_joint"){
 	  tau = (kp*wrist3+kv*wrist3v);
 	}else if(joints[i]->joint_id == "l_finger_actuator"){
 	  tau = (kp*lfinger+kv*lfingerv);
@@ -418,12 +420,12 @@ void init(void* separator, const std::map<std::string, Moby::BasePtr>& read_map,
   const double AMP = 0.5;
   const double SMALL_AMP = AMP * 0.1;
   std::map<std::string, double> qd_init;
-  qd_init["shoulder_pan_joint"] = AMP*PERIOD;
-  qd_init["shoulder_lift_joint"] = SMALL_AMP*PERIOD*2.0;
+  qd_init["base_gear_joint"] = AMP*PERIOD;
+  qd_init["arm_gear_joint"] = SMALL_AMP*PERIOD*2.0;
   qd_init["elbow_joint"] = AMP*PERIOD*2.0/3.0;
-  qd_init["wrist_1_joint"] = AMP*PERIOD*1.0/7.0;
-  qd_init["wrist_2_joint"] = AMP*PERIOD*2.0/11.0;
-  qd_init["wrist_3_joint"] = AMP*PERIOD*3.0/13.0;
+  qd_init["upperarm_gear_joint"] = AMP*PERIOD*1.0/7.0;
+  qd_init["wrist1_gear_joint"] = AMP*PERIOD*2.0/11.0;
+  qd_init["wrist2_gear_joint"] = AMP*PERIOD*3.0/13.0;
   qd_init["l_finger_actuator"] = 0.0;
   qd_init["r_finger_actuator"] = 0.0;
   VectorNd qd;
