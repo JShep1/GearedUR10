@@ -1,3 +1,0 @@
-/home/john/GearedUR10/build/CMakeFiles/resting-controller.dir
-/home/john/GearedUR10/build/CMakeFiles/resting-controller-PID.dir
-/home/john/GearedUR10/build/CMakeFiles/sinusoidal-controller.dir
