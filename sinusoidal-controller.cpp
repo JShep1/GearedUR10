@@ -27,31 +27,6 @@ using boost::dynamic_pointer_cast;
 static RCArticulatedBodyInvDyn id;
 //all static doubles below correspond to the joints pos error and velocity error later used
 
-static double elbow=0;
-static double elbowi = 0;
-static double shoulderlift = 0;
-static double shoulderlifti = 0;
-static double elbowv=0;
-static double shoulderliftv = 0;
-static double shoulderpani = 0;
-static double shoulderpan=0;
-static double shoulderpanv = 0;
-static double wrist1=0;
-static double wrist1i = 0;
-static double wrist1v = 0;
-static double wrist2=0;
-static double wrist2i = 0;
-static double wrist2v = 0;
-static double wrist3=0;
-static double wrist3i = 0;
-static double wrist3v = 0;
-static double lfinger=0;
-static double lfingeri = 0;
-static double lfingerv = 0;
-static double rfinger=0;
-static double rfingeri = 0;
-static double rfingerv = 0;
-
 static double step_size;
 double position_error[8] = {};
 double velocity_error[8] = {};
@@ -134,19 +109,19 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
       position_error[i] = perr;
       velocity_error[i] = verr;
       std::map<std::string, Origin3d>::iterator gainsIt;
-      std::cout <<"id: "<<rotor_joints[i]->joint_id<<std::endl;
+      //std::cout <<"id: "<<rotor_joints[i]->joint_id<<std::endl;
       gainsIt = PID_gains.find(rotor_joints[i]->joint_id);//PID gains holds gains.dat values, parsed in another function
       kp = *(gainsIt->second.data(0));
       ki = *(gainsIt->second.data(1));
       kv = *(gainsIt->second.data(2));
       //std::cout <<"kp: "<<kp<<" ki: "<<ki<<" kd: "<<kv<<std::endl;
       // compute the generalized force contribution
-      std::cout <<"perr: "<<position_error[i]<<std::endl;
-      std::cout <<"verr: "<<velocity_error[i]<<std::endl;
+      //std::cout <<"perr: "<<position_error[i]<<std::endl;
+      //std::cout <<"verr: "<<velocity_error[i]<<std::endl;
       tau = 0;
       tau = kp*position_error[i]+kv*velocity_error[i];
-      std::cout <<"tau: "<<tau<<std::endl;
-      std::map<std::string, double>::const_iterator j = q_init.find(rotor_joints[i]->joint_id);
+      //std::cout <<"tau: "<<tau<<std::endl;
+      //std::map<std::string, double>::const_iterator j = q_init.find(rotor_joints[i]->joint_id);
        //assert(j != q_init.end());
        std::string fname1 = rotor_joints[i]->joint_id + "_desiredPID.txt";
        std::string fname2 = rotor_joints[i]->joint_id + "_statePID.txt";
@@ -156,15 +131,17 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
        out2 << q_des[rotor_joints[i]->joint_id] - rotor_joints[i]->q[0] << std::endl;
        out1.close();
        out2.close();
-       std::cout<<"length of u"<<u.size()<<"index: "<<stator_joints[i]->get_coord_index()<<std::endl;
-         std::cout<<"stored index: "<<stator_index[i]<<std::endl;
+       //std::cout<<"length of u"<<u.size()<<"index: "<<stator_joints[i]->get_coord_index()<<std::endl;
+         //std::cout<<"stored index: "<<stator_index[i]<<std::endl;
        // set the appropriate entry in gf
-       for (unsigned j = 0; j < stator_joints.size(); j++){
+       /*for (unsigned j = 0; j < stator_joints.size(); j++){
 
          std::cout<<stator_joints[i]->joint_id<<std::endl;
-       }
-       u[stator_index[i]-2] = tau; 
-    }
+       }*/
+       //u[(i*2)+1] = tau;
+       //std::cout<<i<<" "<<joints[stator_index[i]]->get_coord_index()<<std::endl;
+       u[joints[stator_index[i]]->get_coord_index()]=tau;
+}
   }else{
     std::cout<<"Unequal amount of rotor and stator joints, PD control cannot be performed"<<std::endl;
   }

@@ -49,7 +49,7 @@ plt.plot(t,y2,'r' ,label='Actual joint angle')
 
 # set limits
 axPlot = plt.subplot(111)
-axPlot.set_xlim(-.001, 5)
+axPlot.set_xlim(-.001, 3)
 
 # add titles, labels, and legend
 plt.title('Desired vs. actual joint angles', fontdict=font)
