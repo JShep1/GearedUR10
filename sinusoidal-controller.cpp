@@ -31,6 +31,7 @@ static double step_size;
 double position_error[8] = {};
 double velocity_error[8] = {};
 std::vector<double> stator_index;
+std::vector<double> rotor_index;
 double dt = -1;
 VectorNd tempQ;
 std::map<std::string, double> q_init;
@@ -65,6 +66,7 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
       stator_index.push_back(i);
     }else if (((i-1)%3 == 0 && i<=16)){
       rotor_joints.push_back(tempJoint);
+      rotor_index.push_back(i);
     }
   }
   for (unsigned i = 0; i < rotor_joints.size(); i++){
@@ -120,6 +122,9 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
       //std::cout <<"verr: "<<velocity_error[i]<<std::endl;
       tau = 0;
       tau = kp*position_error[i]+kv*velocity_error[i];
+       //std::cout<<joints[stator_index[i]]->get_coord_index()<<" "<<joints[stator_index[i]]->joint_id<<std::endl;
+       //std::cout<<joints[rotor_index[i]]->get_coord_index()<<" "<<joints[rotor_index[i]]->joint_id<<std::endl;
+       //std::cout<<tau<<std::endl;
       //std::cout <<"tau: "<<tau<<std::endl;
       //std::map<std::string, double>::const_iterator j = q_init.find(rotor_joints[i]->joint_id);
        //assert(j != q_init.end());
