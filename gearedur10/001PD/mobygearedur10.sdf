@@ -136,7 +136,7 @@
     <joint name='shoulder_pan_joint' type='gearbox'>
       <parent>base_link</parent>
       <child>shoulder_link</child>
-      <gearbox_ratio>1000.0</gearbox_ratio>
+      <gearbox_ratio>10.0</gearbox_ratio>
       <gearbox_reference_body>base_shoulder_gear</gearbox_reference_body>
       <axis>
          <xyz>0.0 0.0 -1.0</xyz>
@@ -255,7 +255,7 @@
     <joint name='shoulder_lift_joint' type='gearbox'>
       <parent>shoulder_link</parent>
       <child>upper_arm_link</child>
-      <gearbox_ratio>395.0</gearbox_ratio>
+      <gearbox_ratio>1.5</gearbox_ratio>
       <gearbox_reference_body>shoulder_arm_gear</gearbox_reference_body>
       <axis>
          <xyz>0.0 -1.0 0.0</xyz>
@@ -374,7 +374,7 @@
     <joint name='elbow_joint' type='gearbox'>
       <parent>upper_arm_link</parent>
       <child>forearm_link</child>
-      <gearbox_ratio>1</gearbox_ratio>
+      <gearbox_ratio>1.5</gearbox_ratio>
       <gearbox_reference_body>upper_forearm_gear</gearbox_reference_body>
       <axis>
          <xyz>0 -1 0</xyz>
@@ -480,7 +480,7 @@
     <joint name='wrist_1_joint' type='gearbox'>
       <parent>forearm_link</parent>
       <child>wrist_1_link</child>
-      <gearbox_ratio>1.3</gearbox_ratio>
+      <gearbox_ratio>1.5</gearbox_ratio>
       <gearbox_reference_body>forearm_w1_gear</gearbox_reference_body>
       <axis>
          <xyz>0.0 -1.0 0.0</xyz>
