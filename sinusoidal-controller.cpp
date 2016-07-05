@@ -28,6 +28,7 @@ static RCArticulatedBodyInvDyn id;
 //all static doubles below correspond to the joints pos error and velocity error later used
 
 static double step_size;
+double positionalError = 0;
 double position_error[8] = {};
 double velocity_error[8] = {};
 std::vector<double> stator_index;
@@ -109,6 +110,7 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
       perr = aq->second - q;
       verr = aqd->second - qdot;
       position_error[i] = perr;
+      positionalError += perr;
       velocity_error[i] = verr;
       std::map<std::string, Origin3d>::iterator gainsIt;
       //std::cout <<"id: "<<rotor_joints[i]->joint_id<<std::endl;
@@ -116,17 +118,9 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
       kp = *(gainsIt->second.data(0));
       ki = *(gainsIt->second.data(1));
       kv = *(gainsIt->second.data(2));
-      //std::cout <<"kp: "<<kp<<" ki: "<<ki<<" kd: "<<kv<<std::endl;
       // compute the generalized force contribution
-      //std::cout <<"perr: "<<position_error[i]<<std::endl;
-      //std::cout <<"verr: "<<velocity_error[i]<<std::endl;
       tau = 0;
       tau = kp*position_error[i]+kv*velocity_error[i];
-       //std::cout<<joints[stator_index[i]]->get_coord_index()<<" "<<joints[stator_index[i]]->joint_id<<std::endl;
-       //std::cout<<joints[rotor_index[i]]->get_coord_index()<<" "<<joints[rotor_index[i]]->joint_id<<std::endl;
-       //std::cout<<tau<<std::endl;
-      //std::cout <<"tau: "<<tau<<std::endl;
-      //std::map<std::string, double>::const_iterator j = q_init.find(rotor_joints[i]->joint_id);
        //assert(j != q_init.end());
        std::string fname1 = rotor_joints[i]->joint_id + "_desiredPID.txt";
        std::string fname2 = rotor_joints[i]->joint_id + "_statePID.txt";
@@ -136,17 +130,13 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
        out2 << q_des[rotor_joints[i]->joint_id] - rotor_joints[i]->q[0] << std::endl;
        out1.close();
        out2.close();
-       //std::cout<<"length of u"<<u.size()<<"index: "<<stator_joints[i]->get_coord_index()<<std::endl;
-         //std::cout<<"stored index: "<<stator_index[i]<<std::endl;
-       // set the appropriate entry in gf
-       /*for (unsigned j = 0; j < stator_joints.size(); j++){
-
-         std::cout<<stator_joints[i]->joint_id<<std::endl;
-       }*/
-       //u[(i*2)+1] = tau;
-       //std::cout<<i<<" "<<joints[stator_index[i]]->get_coord_index()<<std::endl;
        u[joints[stator_index[i]]->get_coord_index()]=tau;
-}
+  }
+       std::string fname1 = "ErrorPlot.txt";
+       std::ofstream out1(fname1.c_str(), std::ostream::app);
+       out1 << positionalError  << std::endl;
+       out1.close();
+       positionalError=0;
   }else{
     std::cout<<"Unequal amount of rotor and stator joints, PD control cannot be performed"<<std::endl;
   }
@@ -235,6 +225,9 @@ void init(void* separator, const std::map<std::string, Moby::BasePtr>& read_map,
     std::ofstream out2(fname2.c_str());
     out1.close();
     out2.close();
+    std::string fname3 = "ErrorPlot.txt";
+    std::ofstream out3(fname3.c_str());
+    out3.close();
   }
 
 
