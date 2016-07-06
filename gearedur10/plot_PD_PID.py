@@ -61,20 +61,20 @@ plt.legend(loc=4, shadow=True)
 plt.axhspan(set_point-error_band_delta,set_point+error_band_delta, facecolor='0.5', alpha=0.25)
 plt.axhline(y=set_point-error_band_delta, color='k',linestyle='--')
 plt.axvspan(0.0,rise_time,facecolor='0.5', alpha=0.25)
-plt.axvline(x=rise_time, color='k',linestyle='--')
-plt.annotate('rise time', xy=(rise_time-.5, set_point-eps))
+#plt.axvline(x=rise_time, color='k',linestyle='--')
+#plt.annotate('rise time', xy=(rise_time-.5, set_point-eps))
 
 # annotate peak_time
-plt.axvline(x=peak_time, color='k',linestyle='--')
-plt.annotate('peak time', xy=(peak_time+.1, set_point-2*eps))
+#plt.axvline(x=peak_time, color='k',linestyle='--')
+#plt.annotate('peak time', xy=(peak_time+.1, set_point-2*eps))
 
 # annotate overshoot
-plt.axhline(y=overshoot, xmin=0, xmax=peak_time,color='k',linestyle='--')
-plt.annotate('overshoot', xy=(peak_time, overshoot+eps))
+#plt.axhline(y=overshoot, xmin=0, xmax=peak_time,color='k',linestyle='--')
+#plt.annotate('overshoot', xy=(peak_time, overshoot+eps))
 
 # annotate settling time
-plt.axvline(x=settling_time,color='k',linestyle='--')
-plt.annotate('settling time', xy=(settling_time, set_point+eps))
+#plt.axvline(x=settling_time,color='k',linestyle='--')
+#plt.annotate('settling time', xy=(settling_time, set_point+eps))
 
 # draw error band
 plt.axhspan(set_point-error_band_delta,set_point+error_band_delta, facecolor='0.5', alpha=0.25)
@@ -82,7 +82,7 @@ plt.axhline(y=set_point-error_band_delta, color='k',linestyle='--')
 plt.axhline(y=set_point+error_band_delta, color='k',linestyle='--')
 #plt.plot([0, y1[:,0].size*DT], [-0.5, -0.5], '--', lw=1.0)
 #plt.plot([0, y1[:,0].size*DT], [-1.5, -1.5], '--', lw=1.0)
-plt.annotate('error band', xy=(10.1, set_point))
+#plt.annotate('error band', xy=(10.1, set_point))
 
 # show the plot
 #plt.show()

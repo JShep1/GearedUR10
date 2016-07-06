@@ -42,13 +42,19 @@ Moby::RCArticulatedBodyPtr robot;
 boost::shared_ptr<TimeSteppingSimulator> sim;
 boost::shared_ptr<GravityForce> grav;
 
+boost::shared_ptr<Ravelin::Jointd> shoulder_pan_joint; 
+
 VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, void*)
 {
   // get the robot body and joints
   boost::shared_ptr<Moby::ArticulatedBody>
   abrobot = boost::dynamic_pointer_cast<Moby::ArticulatedBody>(body);
   const std::vector<boost::shared_ptr<Ravelin::Jointd> >& joints = abrobot->get_joints();
-  
+  std::cout<<"found joint "<<abrobot->find_joint(joints[5]->joint_id)->joint_id<<std::endl;
+
+  shoulder_pan_joint = abrobot->find_joint("shoulder_pan_joint");
+  assert( shoulder_pan_joint ); // if no joint, kill execution
+
   std::vector<boost::shared_ptr<Ravelin::Jointd> > stator_joints;
   std::vector<boost::shared_ptr<Ravelin::Jointd> > rotor_joints;
  
@@ -65,10 +71,16 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
     if ((i-2)%3 == 0 && i<=17 && i > 1){
       stator_joints.push_back(tempJoint);
       stator_index.push_back(i);
+      std::cout<<"Pushed back "<<tempJoint->joint_id<<" as stator "<<std::endl;
     }else if (((i-1)%3 == 0 && i<=16)){
       rotor_joints.push_back(tempJoint);
       rotor_index.push_back(i);
+      std::cout<<"Pushed back "<<tempJoint->joint_id<<" as rotor "<<std::endl;
     }
+  }
+  for (unsigned i=0; i < joints.size();i++){
+       std::cout<<"i: "<<i<<" Coord index: "<<joints[i]->get_coord_index()<<" id: ";
+       std::cout<<joints[i]->joint_id<<std::endl;
   }
   for (unsigned i = 0; i < rotor_joints.size(); i++){
      double desP=0;
@@ -77,6 +89,10 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
         case 0:  desP=std::sin(t*PERIOD)*AMP;//base_gear
                  desV=std::cos(t*PERIOD)*AMP*PERIOD;
                  break;
+        default: desP=0;
+                 desV=0;
+                 break;
+/*
         case 1:  desP=std::sin(t*2.0*PERIOD)*SMALL_AMP;//arm_gear
                  desV=std::cos(t*2.0*PERIOD)*2.0*SMALL_AMP*PERIOD;
                  break;
@@ -92,7 +108,8 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
         case 5:  desP=std::sin(t*(3.0/13.0)*PERIOD)*AMP;//wrist2_gear
                  desV=std::cos(t*(3.0/13.0)*PERIOD)*AMP*PERIOD*(3.0/13.0);
                  break;
-     }
+*/  
+   }
      q_des[rotor_joints[i]->joint_id]=desP;
      qd_des[rotor_joints[i]->joint_id]=desV;
   }
@@ -126,10 +143,22 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
        std::string fname2 = rotor_joints[i]->joint_id + "_statePID.txt";
        std::ofstream out1(fname1.c_str(), std::ostream::app);
        std::ofstream out2(fname2.c_str(), std::ostream::app);
-       out1 << 0  << std::endl;
-       out2 << q_des[rotor_joints[i]->joint_id] - rotor_joints[i]->q[0] << std::endl;
+       out1 << aq->second << std::endl;
+       out2 <<  q << std::endl;
        out1.close();
        out2.close();
+       std::string fname3 = rotor_joints[i]->joint_id + "_VdesiredPID.txt";
+       std::string fname4 = rotor_joints[i]->joint_id + "_VstatePID.txt";
+       std::ofstream out3(fname3.c_str(), std::ostream::app);
+       std::ofstream out4(fname4.c_str(), std::ostream::app);
+       out3 << aqd->second << std::endl;
+       out4 << qdot << std::endl;
+       out3.close();
+       out4.close();
+       std::string fname5 = rotor_joints[i]->joint_id + "_U.txt";
+       std::ofstream out5(fname5.c_str(), std::ostream::app);
+       out5 << tau << std::endl;
+       out5.close();
        u[joints[stator_index[i]]->get_coord_index()]=tau;
   }
        std::string fname1 = "ErrorPlot.txt";
@@ -179,11 +208,11 @@ void init(void* separator, const std::map<std::string, Moby::BasePtr>& read_map,
   const double SMALL_AMP = AMP * 0.1;
   std::map<std::string, double> qd_init;
   qd_init["base_gear_joint"] = AMP*PERIOD;
-  qd_init["arm_gear_joint"] = SMALL_AMP*PERIOD*2.0;
-  qd_init["elbow_joint"] = AMP*PERIOD*2.0/3.0;
-  qd_init["upperarm_gear_joint"] = AMP*PERIOD*1.0/7.0;
-  qd_init["wrist1_gear_joint"] = AMP*PERIOD*2.0/11.0;
-  qd_init["wrist2_gear_joint"] = AMP*PERIOD*3.0/13.0;
+  qd_init["arm_gear_joint"] = 0;//SMALL_AMP*PERIOD*2.0;
+  qd_init["elbow_joint"] = 0;//AMP*PERIOD*2.0/3.0;
+  qd_init["upperarm_gear_joint"] = 0;//AMP*PERIOD*1.0/7.0;
+  qd_init["wrist1_gear_joint"] = 0;//AMP*PERIOD*2.0/11.0;
+  qd_init["wrist2_gear_joint"] = 0;//AMP*PERIOD*3.0/13.0;
   qd_init["l_finger_actuator"] = 0.0;
   qd_init["r_finger_actuator"] = 0.0;
   VectorNd qd;
@@ -228,6 +257,15 @@ void init(void* separator, const std::map<std::string, Moby::BasePtr>& read_map,
     std::string fname3 = "ErrorPlot.txt";
     std::ofstream out3(fname3.c_str());
     out3.close();
+    std::string fname4 = joint_name + "_VdesiredPID.txt";
+    std::string fname5 = joint_name + "_VstatePID.txt";
+    std::ofstream out4(fname4.c_str());
+    std::ofstream out5(fname5.c_str());
+    out4.close();
+    out5.close();
+    std::string fname6 = joint_name + "_U.txt";
+    std::ofstream out6(fname6.c_str());
+    out6.close();
   }
 
 

@@ -1,8 +1,9 @@
-base_gear_joint			380000.0	0.0	0.0
-arm_gear_joint			2500.0	0.0	430.0
-upperarm_gear_joint		1250.0	0.0	175.0
-fore_gear_joint			10500.0	0.0	15.0
-wrist1_gear_joint		4750.0	0.0	20.0
-wrist2_gear_joint		1700.0	0.0	65.0
+base_gear_joint			1.0	0.0	0.1
+arm_gear_joint			100.000	0.0	50.0
+upperarm_gear_joint		500.000	0.0	250.0
+fore_gear_joint			100.000	0.0	50.0
+wrist1_gear_joint		100.000	0.0	50.0
+wrist2_gear_joint		100.000	0.0	50.0
 l_finger_actuator		0.0	0.0	0.0
 r_finger_actuator		0.0	0.0	0.0
+
