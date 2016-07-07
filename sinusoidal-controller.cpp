@@ -42,7 +42,29 @@ Moby::RCArticulatedBodyPtr robot;
 boost::shared_ptr<TimeSteppingSimulator> sim;
 boost::shared_ptr<GravityForce> grav;
 
-boost::shared_ptr<Ravelin::Jointd> shoulder_pan_joint; 
+//rotor joints
+boost::shared_ptr<Ravelin::Jointd> base_gear_joint; 
+boost::shared_ptr<Ravelin::Jointd> arm_gear_joint; 
+boost::shared_ptr<Ravelin::Jointd> upperarm_gear_joint; 
+boost::shared_ptr<Ravelin::Jointd> fore_gear_joint; 
+boost::shared_ptr<Ravelin::Jointd> wrist1_gear_joint; 
+boost::shared_ptr<Ravelin::Jointd> wrist2_gear_joint;
+ 
+//stator joints
+boost::shared_ptr<Ravelin::Jointd> shoulder_gear_joint; 
+boost::shared_ptr<Ravelin::Jointd> shoulder1_gear_joint; 
+boost::shared_ptr<Ravelin::Jointd> forearm_gear_joint; 
+boost::shared_ptr<Ravelin::Jointd> w1_gear_joint; 
+boost::shared_ptr<Ravelin::Jointd> w2_gear_joint; 
+boost::shared_ptr<Ravelin::Jointd> w3_gear_joint; 
+
+void addJointIndex(std::string inputstring, const std::vector<boost::shared_ptr<Ravelin::Jointd> >& joints){
+  for (unsigned i = 0; i < joints.size(); i++){
+    if (inputstring==joints[i]->joint_id){
+      stator_index.push_back(i);
+    }
+  }
+}
 
 VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, void*)
 {
@@ -50,10 +72,39 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
   boost::shared_ptr<Moby::ArticulatedBody>
   abrobot = boost::dynamic_pointer_cast<Moby::ArticulatedBody>(body);
   const std::vector<boost::shared_ptr<Ravelin::Jointd> >& joints = abrobot->get_joints();
-  std::cout<<"found joint "<<abrobot->find_joint(joints[5]->joint_id)->joint_id<<std::endl;
+  //std::cout<<"found joint "<<abrobot->find_joint(joints[5]->joint_id)->joint_id<<std::endl;
 
-  shoulder_pan_joint = abrobot->find_joint("shoulder_pan_joint");
-  assert( shoulder_pan_joint ); // if no joint, kill execution
+  //rotor joints
+  base_gear_joint     = abrobot->find_joint( "base_gear_joint"     );
+  arm_gear_joint      = abrobot->find_joint( "arm_gear_joint"      );
+  upperarm_gear_joint = abrobot->find_joint( "upperarm_gear_joint" );
+  fore_gear_joint     = abrobot->find_joint( "fore_gear_joint"     );
+  wrist1_gear_joint   = abrobot->find_joint( "wrist1_gear_joint"   );
+  wrist2_gear_joint   = abrobot->find_joint( "wrist2_gear_joint"   );
+  
+  //stator joints
+  shoulder_gear_joint  = abrobot->find_joint( "shoulder_gear_joint"  );
+  shoulder1_gear_joint = abrobot->find_joint( "shoulder1_gear_joint" );
+  forearm_gear_joint   = abrobot->find_joint( "forearm_gear_joint"   );
+  w1_gear_joint        = abrobot->find_joint( "w1_gear_joint"        );
+  w2_gear_joint        = abrobot->find_joint( "w2_gear_joint"        );
+  w3_gear_joint        = abrobot->find_joint( "w3_gear_joint"        );
+
+  //rotor joints
+  assert( base_gear_joint     ); // if no joint, kill execution
+  assert( arm_gear_joint      ); // if no joint, kill execution
+  assert( upperarm_gear_joint ); // if no joint, kill execution
+  assert( fore_gear_joint     ); // if no joint, kill execution
+  assert( wrist1_gear_joint   ); // if no joint, kill execution
+  assert( wrist2_gear_joint   ); // if no joint, kill execution
+  
+  //stator joints
+  assert( shoulder_gear_joint  ); // if no joint, kill execution
+  assert( shoulder1_gear_joint ); // if no joint, kill execution
+  assert( forearm_gear_joint   ); // if no joint, kill execution
+  assert( w1_gear_joint        ); // if no joint, kill execution
+  assert( w2_gear_joint        ); // if no joint, kill execution
+  assert( w3_gear_joint        ); // if no joint, kill execution
 
   std::vector<boost::shared_ptr<Ravelin::Jointd> > stator_joints;
   std::vector<boost::shared_ptr<Ravelin::Jointd> > rotor_joints;
@@ -66,22 +117,24 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
   const double AMP = 0.5;
   const double SMALL_AMP = AMP*0.1;
 
-  for (unsigned i=1; i < joints.size(); i++){
-      boost::shared_ptr<Ravelin::Jointd> tempJoint = joints[i];
-    if ((i-2)%3 == 0 && i<=17 && i > 1){
-      stator_joints.push_back(tempJoint);
-      stator_index.push_back(i);
-      std::cout<<"Pushed back "<<tempJoint->joint_id<<" as stator "<<std::endl;
-    }else if (((i-1)%3 == 0 && i<=16)){
-      rotor_joints.push_back(tempJoint);
-      rotor_index.push_back(i);
-      std::cout<<"Pushed back "<<tempJoint->joint_id<<" as rotor "<<std::endl;
-    }
-  }
-  for (unsigned i=0; i < joints.size();i++){
-       std::cout<<"i: "<<i<<" Coord index: "<<joints[i]->get_coord_index()<<" id: ";
-       std::cout<<joints[i]->joint_id<<std::endl;
-  }
+  //add rotor joints to the rotor joint vector
+  rotor_joints.push_back( base_gear_joint     );
+  rotor_joints.push_back( arm_gear_joint      );
+  rotor_joints.push_back( upperarm_gear_joint );
+  rotor_joints.push_back( fore_gear_joint     );
+  rotor_joints.push_back( wrist1_gear_joint   );
+  rotor_joints.push_back( wrist2_gear_joint   );
+  
+  //add stator joints to the stator joint vector
+  stator_joints.push_back( shoulder_gear_joint  );
+  stator_joints.push_back( shoulder1_gear_joint );
+  stator_joints.push_back( forearm_gear_joint   );
+  stator_joints.push_back( w1_gear_joint        );
+  stator_joints.push_back( w2_gear_joint        );
+  stator_joints.push_back( w3_gear_joint        );
+  //add stator joint index to stator_index vector for later use in setting
+  //forces in force vectors 
+  
   for (unsigned i = 0; i < rotor_joints.size(); i++){
      double desP=0;
      double desV=0;
@@ -89,10 +142,7 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
         case 0:  desP=std::sin(t*PERIOD)*AMP;//base_gear
                  desV=std::cos(t*PERIOD)*AMP*PERIOD;
                  break;
-        default: desP=0;
-                 desV=0;
-                 break;
-/*
+///*
         case 1:  desP=std::sin(t*2.0*PERIOD)*SMALL_AMP;//arm_gear
                  desV=std::cos(t*2.0*PERIOD)*2.0*SMALL_AMP*PERIOD;
                  break;
@@ -108,7 +158,7 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
         case 5:  desP=std::sin(t*(3.0/13.0)*PERIOD)*AMP;//wrist2_gear
                  desV=std::cos(t*(3.0/13.0)*PERIOD)*AMP*PERIOD*(3.0/13.0);
                  break;
-*/  
+//*/  
    }
      q_des[rotor_joints[i]->joint_id]=desP;
      qd_des[rotor_joints[i]->joint_id]=desV;
@@ -138,7 +188,6 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
       // compute the generalized force contribution
       tau = 0;
       tau = kp*position_error[i]+kv*velocity_error[i];
-       //assert(j != q_init.end());
        std::string fname1 = rotor_joints[i]->joint_id + "_desiredPID.txt";
        std::string fname2 = rotor_joints[i]->joint_id + "_statePID.txt";
        std::ofstream out1(fname1.c_str(), std::ostream::app);
@@ -159,7 +208,10 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
        std::ofstream out5(fname5.c_str(), std::ostream::app);
        out5 << tau << std::endl;
        out5.close();
-       u[joints[stator_index[i]]->get_coord_index()]=tau;
+       //std::cout<<tau<<" "<<joints[stator_index[i]]->joint_id<<std::endl;
+       u[stator_joints[i]->get_coord_index()]=tau;
+       std::cout<<stator_joints[i]->joint_id<<" ";
+       std::cout<<stator_joints[i]->get_coord_index()<<" "<<tau<<std::endl;
   }
        std::string fname1 = "ErrorPlot.txt";
        std::ofstream out1(fname1.c_str(), std::ostream::app);
@@ -208,11 +260,11 @@ void init(void* separator, const std::map<std::string, Moby::BasePtr>& read_map,
   const double SMALL_AMP = AMP * 0.1;
   std::map<std::string, double> qd_init;
   qd_init["base_gear_joint"] = AMP*PERIOD;
-  qd_init["arm_gear_joint"] = 0;//SMALL_AMP*PERIOD*2.0;
-  qd_init["elbow_joint"] = 0;//AMP*PERIOD*2.0/3.0;
-  qd_init["upperarm_gear_joint"] = 0;//AMP*PERIOD*1.0/7.0;
-  qd_init["wrist1_gear_joint"] = 0;//AMP*PERIOD*2.0/11.0;
-  qd_init["wrist2_gear_joint"] = 0;//AMP*PERIOD*3.0/13.0;
+  qd_init["arm_gear_joint"] = SMALL_AMP*PERIOD*2.0;
+  qd_init["elbow_joint"] = AMP*PERIOD*2.0/3.0;
+  qd_init["upperarm_gear_joint"] = AMP*PERIOD*1.0/7.0;
+  qd_init["wrist1_gear_joint"] = AMP*PERIOD*2.0/11.0;
+  qd_init["wrist2_gear_joint"] = AMP*PERIOD*3.0/13.0;
   qd_init["l_finger_actuator"] = 0.0;
   qd_init["r_finger_actuator"] = 0.0;
   VectorNd qd;
@@ -319,8 +371,11 @@ void init(void* separator, const std::map<std::string, Moby::BasePtr>& read_map,
 	   i++;
 	   c = gainsString[i];
         }
+
      }
+
   }
+
 }
 } // end extern C
 

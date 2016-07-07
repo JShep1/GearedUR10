@@ -44,8 +44,8 @@ t = np.linspace(0,y1.size*DT,y1.size)
 fig = plt.figure()
 
 # plot data
-plt.plot(t,y1,'k' ,label='Desired joint angle')
-plt.plot(t,y2,'r' ,label='Actual joint angle')
+plt.plot(t,y1,'k' ,label='Des')
+plt.plot(t,y2,'r' ,label='Act')
 
 # set limits
 axPlot = plt.subplot(111)
@@ -55,7 +55,7 @@ axPlot.set_xlim(-.001, 3)
 plt.title('Desired vs. actual joint angles', fontdict=font)
 plt.xlabel('Time', fontdict=font)
 plt.ylabel('Joint angle', fontdict=font)
-plt.legend(loc=4, shadow=True)
+#plt.legend(loc=4, shadow=True)
 
 # annotate rise time (interval)
 plt.axhspan(set_point-error_band_delta,set_point+error_band_delta, facecolor='0.5', alpha=0.25)
