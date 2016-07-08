@@ -186,10 +186,9 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
       ki = *(gainsIt->second.data(1));
       kv = *(gainsIt->second.data(2));
       // compute the generalized force contribution
-      //std::cout<<kp<<" "<<ki<<" "<<kv<<std::endl;
+      std::cout<<kp<<" "<<ki<<" "<<kv<<std::endl;
       tau = 0;
       tau = kp*position_error[i]+kv*velocity_error[i];
-  /*
        std::string fname1 = rotor_joints[i]->joint_id + "_desiredPID.txt";
        std::string fname2 = rotor_joints[i]->joint_id + "_statePID.txt";
        std::ofstream out1(fname1.c_str(), std::ostream::app);
@@ -210,11 +209,10 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
        std::ofstream out5(fname5.c_str(), std::ostream::app);
        out5 << tau << std::endl;
        out5.close();
-*/
        //std::cout<<tau<<" "<<joints[stator_index[i]]->joint_id<<std::endl;
        u[stator_joints[i]->get_coord_index()]=tau;
-       //std::cout<<stator_joints[i]->joint_id<<" ";
-       //std::cout<<stator_joints[i]->get_coord_index()<<" "<<tau<<std::endl;
+       std::cout<<stator_joints[i]->joint_id<<" ";
+       std::cout<<stator_joints[i]->get_coord_index()<<" "<<tau<<std::endl;
   }
        std::string fname1 = "ErrorPlot.txt";
        std::ofstream out1(fname1.c_str(), std::ostream::app);
@@ -302,7 +300,6 @@ void init(void* separator, const std::map<std::string, Moby::BasePtr>& read_map,
   // overwrite any output files
   for (std::map<std::string, double>::const_iterator i = q_init.begin(); i != q_init.end(); i++)
   {
-/*
     const std::string& joint_name = i->first;
     std::string fname1 = joint_name + "_desiredPID.txt";
     std::string fname2 = joint_name + "_statePID.txt";
@@ -310,11 +307,9 @@ void init(void* separator, const std::map<std::string, Moby::BasePtr>& read_map,
     std::ofstream out2(fname2.c_str());
     out1.close();
     out2.close();
-  */ 
-   std::string fname3 = "ErrorPlot.txt";
+    std::string fname3 = "ErrorPlot.txt";
     std::ofstream out3(fname3.c_str());
     out3.close();
-/*
     std::string fname4 = joint_name + "_VdesiredPID.txt";
     std::string fname5 = joint_name + "_VstatePID.txt";
     std::ofstream out4(fname4.c_str());
@@ -324,7 +319,6 @@ void init(void* separator, const std::map<std::string, Moby::BasePtr>& read_map,
     std::string fname6 = joint_name + "_U.txt";
     std::ofstream out6(fname6.c_str());
     out6.close();
-*/
   }
 
 
