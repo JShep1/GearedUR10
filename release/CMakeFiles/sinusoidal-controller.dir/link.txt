@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC -g   -shared -Wl,-soname,libsinusoidal-controller.so -o libsinusoidal-controller.so CMakeFiles/sinusoidal-controller.dir/sinusoidal-controller.cpp.o /usr/local/lib/libMoby.so /usr/local/lib/libRavelin.so -Wl,-rpath,/usr/local/lib 

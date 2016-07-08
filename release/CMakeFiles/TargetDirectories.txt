@@ -1,0 +1,3 @@
+/home/jshepherd/GearedUR10/release/CMakeFiles/resting-controller.dir
+/home/jshepherd/GearedUR10/release/CMakeFiles/resting-controller-PID.dir
+/home/jshepherd/GearedUR10/release/CMakeFiles/sinusoidal-controller.dir
