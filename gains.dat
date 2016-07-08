@@ -1,8 +1,9 @@
-shoulder_pan_joint		50.0	0.0	0.0
-shoulder_lift_joint		50.0	0.0	0.0
-elbow_joint			50.0	0.0	0.0
-wrist_1_joint			50.0	0.0	0.0
-wrist_2_joint			50.0	0.0	0.0
-wrist_3_joint			50.0	0.0	0.0
-l_finger_actuator		10.0	0.0	0.0
-r_finger_actuator		10.0	0.0	0.0
+base_gear_joint			300.0	0.0	0
+arm_gear_joint			100.0	0.0	0.0
+upperarm_gear_joint		400.0	0.0	0.0
+fore_gear_joint			100.0	0.0	0.0
+wrist1_gear_joint		100.0	0.0	0.0
+wrist2_gear_joint		100.0	0.0	0.0
+l_finger_actuator		0.0	0.0	0.0
+r_finger_actuator		0.0	0.0	0.0
+
