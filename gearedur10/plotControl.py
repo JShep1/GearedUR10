@@ -33,7 +33,7 @@ font =  {'family' : 'sans-serif',
         }
 
 # step size (constant value)
-DT = 0.05
+DT = 0.01
 
 # load data
 y1 = pylab.loadtxt(sys.argv[1] + "_U.txt")

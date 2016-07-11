@@ -31,16 +31,18 @@ function totalerror = GearedUR10Objective(X)
   
   %make system call to run moby
   command = 'moby-driver -mt=3 -s=0.05 -p=/home/jshepherd/GearedUR10/release/libsinusoidal-controller.so ur10-geared.xml';
-  
-  system(command);
-  %read from error txt file
-  filename = 'ErrorPlot.txt';
-  A = dlmread(filename);
+  try 
+    system(command);
+    %read from error txt file
+    filename = 'ErrorPlot.txt';
+    A = dlmread(filename);
  
-  rownum = size(A);
-  totalerror = 0;
-  for row = 1:rownum
+    rownum = size(A);
+    totalerror = 0;
+    for row = 1:rownum
       totalerror = totalerror + A(row) * A(row);
+    end
+  catch
+    totalerror=10000000;
   end
-  
   %calculate total error from values in txt file
