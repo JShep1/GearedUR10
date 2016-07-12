@@ -43,16 +43,16 @@ t = np.linspace(0,y1.size*DT,y1.size)
 fig = plt.figure()
 
 # plot data
-plt.plot(t,y1,'k' ,label='Control')
+plt.plot(t,y1,'k' ,label='Applied Control')
 
 # set limits
 axPlot = plt.subplot(111)
 axPlot.set_xlim(-.001, 3)
 
 # add titles, labels, and legend
-plt.title('Desired vs. actual joint angles', fontdict=font)
+plt.title('Applied Control vs. Time', fontdict=font)
 plt.xlabel('Time', fontdict=font)
-plt.ylabel('Joint angle', fontdict=font)
+plt.ylabel('Control', fontdict=font)
 plt.legend(loc=4, shadow=True)
 
 # annotate rise time (interval)

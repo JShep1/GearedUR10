@@ -201,8 +201,8 @@ VectorNd& controller(shared_ptr<ControlledBody> body, VectorNd& u, double t, voi
        std::string fname4 = rotor_joints[i]->joint_id + "_VstatePID.txt";
        std::ofstream out3(fname3.c_str(), std::ostream::app);
        std::ofstream out4(fname4.c_str(), std::ostream::app);
-       out3 << aqd->second << std::endl;
-       out4 << qdot << std::endl;
+       out3 << 0 << std::endl;
+       out4 << aqd->second-qdot << std::endl;
        out3.close();
        out4.close();
        std::string fname5 = rotor_joints[i]->joint_id + "_U.txt";

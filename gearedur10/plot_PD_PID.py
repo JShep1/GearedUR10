@@ -52,9 +52,9 @@ axPlot = plt.subplot(111)
 axPlot.set_xlim(-.001, 3)
 
 # add titles, labels, and legend
-plt.title('Desired vs. actual joint angles', fontdict=font)
+plt.title('Positional Error', fontdict=font)
 plt.xlabel('Time', fontdict=font)
-plt.ylabel('Joint angle', fontdict=font)
+plt.ylabel('Error', fontdict=font)
 #plt.legend(loc=4, shadow=True)
 
 # annotate rise time (interval)

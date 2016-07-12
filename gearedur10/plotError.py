@@ -43,7 +43,7 @@ t = np.linspace(0,y1.size*DT,y1.size)
 fig = plt.figure()
 
 # plot data
-plt.plot(t,y1,'k' ,label='Error')
+plt.plot(t,y1,'k' ,label='Error over time')
 
 # set limits
 axPlot = plt.subplot(111)
@@ -53,7 +53,7 @@ axPlot.set_ylim(-5, 5)
 # add titles, labels, and legend
 plt.title('Error', fontdict=font)
 plt.xlabel('Time', fontdict=font)
-plt.ylabel('Accumulated Error', fontdict=font)
+plt.ylabel('Error at Given Timestep', fontdict=font)
 plt.legend(loc=4, shadow=True)
 
 # annotate rise time (interval)
