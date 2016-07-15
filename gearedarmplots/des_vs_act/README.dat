@@ -1,0 +1,3 @@
+-- note the run.bash file is used to generate the plots and store them in allplots/ directory
+
+/command is ./run.bash in the directory
