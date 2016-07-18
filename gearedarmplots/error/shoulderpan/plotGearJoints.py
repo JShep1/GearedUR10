@@ -66,9 +66,9 @@ plt.ylabel('Error', fontdict=font)
 plt.legend(loc=4, shadow=True)
 
 # annotate rise time (interval)
-plt.axhspan(set_point-error_band_delta,set_point+error_band_delta, facecolor='0.5', alpha=0.25)
-plt.axhline(y=set_point-error_band_delta, color='k',linestyle='--')
-plt.axvspan(0.0,rise_time,facecolor='0.5', alpha=0.25)
+#plt.axhspan(set_point-error_band_delta,set_point+error_band_delta, facecolor='0.5', alpha=0.25)
+#plt.axhline(y=set_point-error_band_delta, color='k',linestyle='--')
+#plt.axvspan(0.0,rise_time,facecolor='0.5', alpha=0.25)
 #plt.axvline(x=rise_time, color='k',linestyle='--')
 #plt.annotate('rise time', xy=(rise_time-.5, set_point-eps))
 
