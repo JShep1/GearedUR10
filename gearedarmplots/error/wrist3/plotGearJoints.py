@@ -51,14 +51,14 @@ fig = plt.figure()
 #print "%d" % y3.size
 
 # plot data
-plt.plot(t001,y2,'r' ,label='Error-0.001')
-plt.plot(t01, y3,'g' ,label='Error-0.01')
-plt.plot(t05, y4,'b' ,label='Error-0.05')
+plt.plot(t001,y2,'r' ,label='0.001')
+plt.plot(t01, y3,'g' ,label='0.01')
+plt.plot(t05, y4,'b' ,label='0.05')
 
 # set limits
 axPlot = plt.subplot(111)
 axPlot.set_xlim(-.001, 3)
-s = 'Positional Error for Different Timesteps';
+s = 'Positional Error for Different Timesteps (Geared Arm)';
 # add titles, labels, and legend
 plt.title(s, fontdict=font)
 plt.xlabel('Time', fontdict=font)
